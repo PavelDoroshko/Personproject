@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns: th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<form action="/web-app/findAll" method="get">
+    <button type="submit">Весь список авто объявлений</button>
+</form>
+<p>
+<form method="get" action="/web-app/create">
+    <button type="submit">Создать новое объявление</button>
+</form>
+<p>
+<form action="/web-app/delete" method="get">
+    <h2><label for="id">Удалить объявление по id:</label>
+        <input name="id" type="text" id="id" pattern="^[0-9]+$" required size="1"/>
+        <input type="submit" value="Удалить"/></h2>
+</form>
+<form action="/web-app/update" method="get">
+    <h2><label for="id">Редактировать объявление по id:</label>
+        <input name="id" type="text" id="id" pattern="^[0-9]+$" required size="1"/>
+        <input type="submit" value="Редактировать"/></h2>
+</form>
+</body>
+</html>
