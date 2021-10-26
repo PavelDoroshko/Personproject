@@ -9,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(User.class)
 public abstract class User_ {
 
+	public static volatile SingularAttribute<User, Integer> pasword;
 	public static volatile ListAttribute<User, Announcement> announcementList;
 	public static volatile SingularAttribute<User, Integer> balance;
 	public static volatile SingularAttribute<User, Long> user_id;
@@ -16,6 +17,7 @@ public abstract class User_ {
 	public static volatile ListAttribute<User, BestAnnouncement> bestAnnouncements;
 	public static volatile SingularAttribute<User, CreditCart> creditCart;
 
+	public static final String PASWORD = "pasword";
 	public static final String ANNOUNCEMENT_LIST = "announcementList";
 	public static final String BALANCE = "balance";
 	public static final String USER_ID = "user_id";

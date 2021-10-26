@@ -1,7 +1,8 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.CarDao;
-import by.ita.je.exception.NatFoundException;
+import by.ita.je.exception.IncorrectDataException;
+import by.ita.je.exception.NoFoundEntityException;
 import javassist.NotFoundException;
 import by.ita.je.module.Car;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,13 @@ public class CarService implements InterfaceCarService {
 
     @Override
     @Transactional
-    public Car create(Car car) {
+    public Car create(Car car) throws IncorrectDataException{
+        if ((car.getNameCar() == "")|| (car.getModelCar() == ""))
+           throw new IncorrectDataException("Car");
+        car.setCustom("");
+          car.setVolumeEngine(0);
+       if ((car.getVolumeEngine()<0)||(car.getMilage()<0))
+           throw new IncorrectDataException("Car");
         return carDao.save(car);
     }
 
@@ -32,7 +39,7 @@ public class CarService implements InterfaceCarService {
     @Override
     @Transactional
     public Car update(Long id, Car car) {
-        Car secondCar = carDao.findById(id).orElseThrow(() -> new NatFoundException("Car"));
+         final Car secondCar = carDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Car"));
         secondCar.setNameCar(car.getNameCar());
         secondCar.setModelCar(car.getModelCar());
         secondCar.setCustom(car.getCustom());
@@ -53,15 +60,6 @@ public class CarService implements InterfaceCarService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Car readOne(Long id) throws NotFoundException {
-        return carDao.findById(id).orElseThrow(() -> new NatFoundException("Car"));
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        carDao.deleteById(id);
-    }
 
 
 }

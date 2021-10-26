@@ -9,6 +9,5 @@ public interface InterfaceCarService {
     Car create(Car car);
     Car update(Long id, Car car) throws NotFoundException;
     List<Car> readAll();
-    Car readOne(Long id) throws NotFoundException;
-    void deleteById(Long id);
+
 }

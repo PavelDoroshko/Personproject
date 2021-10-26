@@ -22,6 +22,7 @@ public class User {
     private long user_id;
     private String name;
     private int balance;
+    private int pasword;
 
     @OneToMany( orphanRemoval = true, cascade ={ CascadeType.ALL},mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore

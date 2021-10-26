@@ -1,7 +1,8 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.AnnouncementDao;
-import by.ita.je.exception.NatFoundException;
+import by.ita.je.exception.IncorrectDataException;
+import by.ita.je.exception.NoFoundEntityException;
 import by.ita.je.module.Announcement;
 import org.springframework.stereotype.Service;
 import by.ita.je.service.api.InterfaceAnnouncement;
@@ -24,12 +25,16 @@ public class AnnouncementService implements InterfaceAnnouncement {
     @Override
     @Transactional
     public Announcement create(Announcement announcement) {
+        if ((announcement.getNumberPhone() == 0))
+            throw new IncorrectDataException("Announcement");
+     //   announcement.setGet_up(0);
         return announcementDao.save(announcement);
     }
 
     @Override
-    public Announcement update(long id, Announcement announcement) throws NatFoundException {
-        Announcement secondannouncement = announcementDao.findById(id).orElseThrow(() -> new NatFoundException("announcement"));
+    @Transactional
+    public Announcement update(long id, Announcement announcement) throws NoFoundEntityException {
+        Announcement secondannouncement = announcementDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Announcement"));
         secondannouncement.setGet_up(announcement.getGet_up());
         secondannouncement.setNumberPhone(announcement.getNumberPhone());
         return announcementDao.save(secondannouncement);
@@ -45,12 +50,14 @@ public class AnnouncementService implements InterfaceAnnouncement {
 
     @Override
     @Transactional
-    public Announcement readOne(Long id) throws NatFoundException {
-        return announcementDao.findById(id).orElseThrow(() -> new NatFoundException("announcement"));
+    public Announcement readOne(Long id) throws NoFoundEntityException {
+        return announcementDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Announcement"));
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
+
         announcementDao.deleteById(id);
     }
 }

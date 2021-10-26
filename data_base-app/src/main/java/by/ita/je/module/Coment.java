@@ -23,6 +23,6 @@ public class Coment {
 
     //@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
    // @JoinColumn(name = "announcement_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Announcement announcement;
 }

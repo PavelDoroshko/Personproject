@@ -1,10 +1,8 @@
 package by.ita.je.controller;
 
-import by.ita.je.dto.AnnouncementDto;
-import by.ita.je.dto.BestAnnouncementDto;
-import by.ita.je.dto.CreditCartDto;
-import by.ita.je.dto.UserDto;
+import by.ita.je.dto.*;
 import by.ita.je.module.Announcement;
+import by.ita.je.module.Coment;
 import by.ita.je.module.User;
 import by.ita.je.service.api.InterfaceBuisness;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,10 +22,10 @@ public class BuisnessController {
 
     @ResponseBody
     @PostMapping("/create")
-    public AnnouncementDto createAnnouncement(@RequestBody UserDto userDto) {
-        User user = objectMapper.convertValue(userDto, User.class);
-        //Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
-        return objectMapper.convertValue(interfaceBuisness.createAnnouncement(user), AnnouncementDto.class);
+    public AnnouncementDto createAnnouncement(@RequestBody AnnouncementDto announcementDto) throws NotFoundException {
+        //User user = objectMapper.convertValue(userDto, User.class);
+        Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
+        return objectMapper.convertValue(interfaceBuisness.createAnnouncement(announcement), AnnouncementDto.class);
     }
 
     @GetMapping("/read/one")
@@ -49,7 +47,7 @@ public class BuisnessController {
     }
 
     @GetMapping("/read/all")
-    public List<AnnouncementDto> readAll(@RequestBody UserDto userDto) {
+    public List<AnnouncementDto> readAll(@RequestBody UserDto userDto) throws NotFoundException {
         User user = objectMapper.convertValue(userDto, User.class);
         return interfaceBuisness.readAll(user).stream()
                 .map(announcement -> objectMapper.convertValue(announcement, AnnouncementDto.class))
@@ -58,19 +56,19 @@ public class BuisnessController {
     }
 
     @ResponseBody
-    @PutMapping("/update/coment")
-    public AnnouncementDto coment(@RequestBody AnnouncementDto announcementDto) {
-        Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
-        return objectMapper.convertValue(interfaceBuisness.updateComent(announcement), AnnouncementDto.class);
+    @PostMapping("/update/coment")
+    public ComentDto coment(@RequestParam("id") Long id,@RequestBody ComentDto comentDto) {
+        Coment coment = objectMapper.convertValue(comentDto, Coment.class);
+        return objectMapper.convertValue(interfaceBuisness.createComent(id,coment), ComentDto.class);
 
     }
     @ResponseBody
     @PostMapping("/add/best")
-    public BestAnnouncementDto addZakladka(@RequestParam("id") Long id, @RequestBody UserDto userDto) throws NotFoundException {
+    public BestAnnouncementDto addZakladka(@RequestParam("id") Long id,@RequestBody UserDto userDto) throws NotFoundException {
       //  Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
         User user = objectMapper.convertValue(userDto, User.class);
         return objectMapper.convertValue(interfaceBuisness.addAnnouncementInBestAnnouncement(id,user),BestAnnouncementDto.class);
-
+       // @RequestBody UserDto userDto
     }
     @ResponseBody
     @PostMapping("/creditcart")

@@ -5,9 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -25,13 +26,15 @@ public class Announcement {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Car car;
 
-    @ManyToOne(   cascade = {CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToOne(  cascade = {CascadeType.MERGE})
     @JoinColumn(name="user_user_id")
     private User user;
 
-   @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+   @OneToOne(cascade = CascadeType.ALL)
     private Coment  coment;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @OnDelete(action = OnDeleteAction.CASCADE)
+   // @JsonIgnore
     private BestAnnouncement bestAnnouncement;
 }

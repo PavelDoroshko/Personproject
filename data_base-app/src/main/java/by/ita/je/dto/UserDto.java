@@ -14,6 +14,7 @@ public class UserDto {
     private long user_id;
     private String name;
     private int balance;
+    private int pasword;
     private List<BestAnnouncementDto> bestAnnouncements;
    private List<AnnouncementDto> announcementList;
 private CreditCartDto creditCart;

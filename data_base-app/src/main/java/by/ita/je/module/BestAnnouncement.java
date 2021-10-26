@@ -1,10 +1,13 @@
 package by.ita.je.module;
 
 import by.ita.je.module.Announcement;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -19,8 +22,9 @@ public class BestAnnouncement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne (cascade = CascadeType.ALL)
-
+    @OneToOne (orphanRemoval = true,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+    @OnDelete(action = OnDeleteAction.CASCADE)
+ //   @JsonIgnore
     private Announcement announcement;
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.EAGER)

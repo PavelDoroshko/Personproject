@@ -1,23 +1,24 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.UserDao;
-import by.ita.je.exception.NatFoundException;
-import javassist.NotFoundException;
+import by.ita.je.exception.IncorrectDataException;
+import by.ita.je.exception.NoFoundEntityException;
+import by.ita.je.module.Car;
 import by.ita.je.module.User;
-import org.springframework.stereotype.Service;
 import by.ita.je.service.api.InterfaseUserService;
+import javassist.NotFoundException;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-@Transactional
+
 public class UserService implements InterfaseUserService {
-    private UserDao userDao;
+    private final UserDao userDao;
 
     public UserService(UserDao userDao) {
         this.userDao = userDao;
@@ -26,35 +27,38 @@ public class UserService implements InterfaseUserService {
 
     @Override
     @Transactional
-    public User create(User user) {
+    public User create(User user) throws IncorrectDataException {
+        if ((user.getName() == ""))
+            throw new IncorrectDataException("User");
+        user.setBalance(0);
+       if( user.getPasword()==0)
+           throw new IncorrectDataException("User");
         return userDao.save(user);
     }
 
     @Override
-    public User readOne(Long id) throws NotFoundException {
-        return userDao.findById(id).orElseThrow(() -> new NatFoundException("User"));
+    public User readOne(Long id) throws NotFoundException,IncorrectDataException {
+        if (id < 1) throw new IncorrectDataException("User");
+         final User user =userDao.findById(id).orElseThrow(() -> new NoFoundEntityException("User"));
+   return user;
     }
 
     @Override
-    public void deleteById(Long id) {
-        userDao.deleteById(id);
-    }
+    public void deleteById(Long id) throws NotFoundException, IncorrectDataException {
+        if (id < 1) throw new IncorrectDataException("User");
+        try {
+            userDao.deleteById(id);
+        } catch (Exception e) {
+            throw new NoFoundEntityException("User");
+        }
 
+    }
     @Override
-    @Transactional
     public List<User> readAll() {
         final Spliterator<User> result = userDao.findAll().spliterator();
         return StreamSupport
                 .stream(result, false)
                 .collect(Collectors.toList());
     }
-    @Override
-    public User update(Long id, User user) throws NotFoundException {
-        User secondUser  = userDao.findById(id).orElseThrow(() -> new NotFoundException("NotFoundException Home"));
-      secondUser.setBestAnnouncements(user.getBestAnnouncements());
-      secondUser.setAnnouncementList(user.getAnnouncementList());
-      secondUser.setBalance(user.getBalance());
-      secondUser.setName(user.getName());
-        return userDao.save(secondUser);
-    }
+
 }

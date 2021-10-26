@@ -18,6 +18,7 @@ public class CreditCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
     private int cash;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private User user;
 }

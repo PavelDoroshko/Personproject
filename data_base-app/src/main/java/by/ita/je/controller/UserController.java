@@ -1,10 +1,12 @@
 package by.ita.je.controller;
 
+import by.ita.je.dto.CarDto;
 import by.ita.je.service.api.InterfaseUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import by.ita.je.dto.UserDto;
 import javassist.NotFoundException;
 import by.ita.je.module.User;
+import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class UserController {
         return objectMapper.convertValue(interfaseUserService.readOne(id), UserDto.class);
     }
 
+    @SneakyThrows
     @DeleteMapping(value = "/delete")
     public void deleteOne(@RequestParam("id") long id) {
         interfaseUserService.deleteById(id);
