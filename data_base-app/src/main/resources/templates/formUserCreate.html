@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Create Person</title>
+    <style>
+        body {
+            background-color: #0022CCFF;
+        }
+    </style>
+</head>
+<body>
+<h1>Создание новой записи Пользователя</h1>
+<form action="#" th:action="@{/newUser}" th:object="${userdLogin}" method="post">
+    <p>логин : <input type="text" pattern="^[a-zA-Z]+$" required th:field="*{login}" /></p>
+    <p>пароль: <input type="text"  th:field="*{pasword}"  pattern="(^[0-9]{0,7})+$"/></p>
+    <p><input type="submit" value="Создать" /> <input type="reset" value="Отменить" /></p>
+</form>
+<br>
+<form method="get" action="/data_base-app//">
+    <button type="submit">На главную страницу</button>
+</form>
+</body>
+</html>

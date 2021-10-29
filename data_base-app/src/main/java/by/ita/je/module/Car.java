@@ -29,6 +29,6 @@ public class Car {
     private String custom;
     private String exchange;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
      private Announcement announcement;
 }

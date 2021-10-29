@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Find by id</title>
+  <style>
+    body {
+      background-color: #00CC66;
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+<form id="home" method="get" ></form>
+<form id="findById" method="get">
+  <input name="user_id" type="text" th:value= "${userdLogin.user_id}" user_id="user_id" hidden="true"/>
+</form>
+<button type="submit" form="home"  formaction="/data_base-app//" >На главную страницу</button>
+<button type="submit" form="findById" formaction="/web-app/update" >Изменить</button>
+<button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все</button>
+
+<h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
+<table border="1" width="65%" cellpadding="5">
+  <tr>
+
+    <th>логин:</th>
+    <th>баланс:</th>
+    <th>пароль</th>
+  </tr>
+  <tr>
+
+    <td th:text="${userdLogin.login}">Nothing</td>
+    <td th:text="${userdLogin.balance}">Nothing</td>
+    <td th:text="${userdLogin.pasword}">Nothing</td>
+  </tr>
+</table>
+
+
+</body>
+</html>

@@ -6,8 +6,9 @@ DROP TABLE IF EXISTS coment;
 
 CREATE TABLE user (
                      user_id long  NOT NULL AUTO_INCREMENT,
-                     name varchar(40),
+                    login varchar(40),
                      balance INT,
+                     pasword INT,
                      announcement_id long,
                      best_announcement_id  long,
                      credit_cart_id long,
@@ -61,4 +62,13 @@ CREATE TABLE credit_cart (
                                 user_id long,
                                 PRIMARY KEY (id),
                                 FOREIGN KEY (user_user_id) REFERENCES  user(user_id )
+
+);
+ CREATE TABLE best_announcement (
+                                 id  long NOT NULL AUTO_INCREMENT,
+                                 announcement_id long,
+                                 user_user_id long,
+                                 user_id long,
+                                  PRIMARY KEY (id),
+                                  FOREIGN KEY (announcement_id) REFERENCES  announcement (id)
 );

@@ -28,8 +28,8 @@ public class CarService implements InterfaceCarService {
     public Car create(Car car) throws IncorrectDataException{
         if ((car.getNameCar() == "")|| (car.getModelCar() == ""))
            throw new IncorrectDataException("Car");
-        car.setCustom("");
-          car.setVolumeEngine(0);
+      //  car.setCustom("");
+         // car.setVolumeEngine(0);
        if ((car.getVolumeEngine()<0)||(car.getMilage()<0))
            throw new IncorrectDataException("Car");
         return carDao.save(car);

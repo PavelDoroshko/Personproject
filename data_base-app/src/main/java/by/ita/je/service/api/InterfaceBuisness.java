@@ -7,18 +7,18 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface InterfaceBuisness {
-    public Announcement createAnnouncement(Announcement announcement) throws NotFoundException;
+    public Announcement createAnnouncement(Long id,Announcement announcement) throws NotFoundException;
     Announcement getUpAnnoncement (Announcement announcement);
 
-    User  addBalance (User user ) throws NotFoundException;
+    User  addBalance (Long id) throws NotFoundException;
 
-    CreditCart createCreditCart (User user) throws NotFoundException;
+    CreditCart createCreditCart (Long id) throws NotFoundException;
 
-    Announcement createAnnouncement(User user);
+
 
     Announcement update(Long id, Announcement announcement) throws NotFoundException;
 
-    List<Announcement> readAll(User user) throws NotFoundException;
+    List<Announcement> readAllAnnoucement (Long id) throws NotFoundException;
 
     void deleteById(long id);
 
@@ -26,5 +26,11 @@ public interface InterfaceBuisness {
     Coment createComent(Long id,Coment coment);
 
     @Transactional
-    BestAnnouncement addAnnouncementInBestAnnouncement(Long Id,User user) throws NotFoundException;
+    BestAnnouncement addAnnouncementInBestAnnouncement(Long Id,Long userId) throws NotFoundException;
+
+
+    @Transactional
+    public Announcement getUpAnnoncementMoney(Long id,int money,Long userId);
+
+
 }

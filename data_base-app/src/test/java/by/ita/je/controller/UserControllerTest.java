@@ -45,7 +45,7 @@ class UserControllerTest {
     void createUser() {
 
         User user =  User.builder()
-                .name("pavel")
+                .login("pavel")
                 .pasword(123)
                 .build();
         mockMvc.perform(
@@ -55,7 +55,7 @@ class UserControllerTest {
         )
                 .andExpect(status().is2xxSuccessful())
                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").isNumber())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("pavel"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("pavel"));
 
     }
 
@@ -65,11 +65,11 @@ class UserControllerTest {
     @Test
     void readAll() {
         User user1 =  User.builder()
-                .name("pavel")
+                .login("pavel")
                 .pasword(123)
                 .build();
         User user2 =  User.builder()
-                .name("pavel")
+                .login("pavel")
                 .pasword(123)
                 .build();
         userDao.save(user1);

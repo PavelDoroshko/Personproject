@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns: th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<p>Подбери авто здесь</a></p>
+<form action="/web-app/findAll" method="get">
+    <button type="submit">Весь список авто объявлений</button>
+</form>
+<p>
+<form method="get" action="/data_base-app/create">
+    <button type="submit">создать учетную запись пользователя</button>
+</form>
+<table border="1" width="20%" cellpadding="5">
+    <tr>
+        <td>
+            <h2>Найти пользователя:</h2>
+            <form id="field" method="get">
+                <label for="login">логин: </label>
+                <input type="text" id="login" name="login"  pattern="^[a-zA-Z]+$"/>
+            </form>
+            <br>
+            <p>
+                <button type="submit" form="field" formaction="/data_base-app/findUser" >Найти </button>
+            </p>
+        </td>
+    </tr>
+</table>
+
+
+<form action="/web-app/update" method="get">
+    <h2><label for="id">Изменить данные по id:</label>
+        <input name="id" type="text" id="id" pattern="^[0-9]+$" required size="1"/>
+        <input type="submit" value="Изменить"/></h2>
+</form>
+
+
+<table border="1" width="60%" cellpadding="5">
+    <tr>
+        <td>
+            <h2>Найти авто по фильтру:</h2>
+            <form id="field" method="get">
+                <label for="nameCar">марка авто: </label>
+                <input type="text" id="nameCar" name="nameCar"  pattern="^[a-zA-Z]+$"/>
+                <label for="modelCar">модель авто: </label>
+                <input type="text" id="modelCar"  name="modelCar"  pattern="^[a-zA-Z]+$"/>
+            </form>
+            <br>
+            <p>
+                <button type="submit" form="field" formaction="/data_base-app/searchCriteria" >Найти авто</button>
+            </p>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

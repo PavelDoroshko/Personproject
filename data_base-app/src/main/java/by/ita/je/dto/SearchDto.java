@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class SearchDto {
-    private long id;
+   // private long id;
     private String nameCar;
     private String modelCar;
     private int price;

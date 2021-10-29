@@ -9,8 +9,8 @@
     <button type="submit">Вернуться в кабинет пользователя</button>
 </form>
 <p>
-<div th:if="${not #lists.isEmpty(announcementlist)}">
-    <div th:each="announcement : ${announcementlist}">
+<div th:if="${not #lists.isEmpty(announcements)}">
+    <div th:each="announcement : ${announcements}">
         <form id="FindById" method="get">
             <input name="id" type="text" th:value= "${announcement.id}" id="id" hidden="true"/>
             <button type="submit" form="FindById" formaction="/web-app/update" >Редактировать</button>

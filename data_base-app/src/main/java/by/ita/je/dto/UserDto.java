@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class UserDto {
-    private long user_id;
-    private String name;
+    public long user_id;
+    private String login;
     private int balance;
     private int pasword;
     private List<BestAnnouncementDto> bestAnnouncements;

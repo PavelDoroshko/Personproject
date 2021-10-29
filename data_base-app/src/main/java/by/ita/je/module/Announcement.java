@@ -26,11 +26,13 @@ public class Announcement {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Car car;
 
-    @ManyToOne(  cascade = {CascadeType.MERGE})
-    @JoinColumn(name="user_user_id")
-    private User user;
+   //@ManyToOne(  cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
+   //@ManyToOne( cascade = {CascadeType.MERGE})
+   // @JoinColumn(name="user_user_id")
+   @ManyToOne(  cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+   private User user;
 
-   @OneToOne(cascade = CascadeType.ALL)
+   @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Coment  coment;
 
     @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})

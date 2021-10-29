@@ -22,10 +22,9 @@ public class BuisnessController {
 
     @ResponseBody
     @PostMapping("/create")
-    public AnnouncementDto createAnnouncement(@RequestBody AnnouncementDto announcementDto) throws NotFoundException {
-        //User user = objectMapper.convertValue(userDto, User.class);
+    public AnnouncementDto createAnnouncement(@RequestParam("id") long id,@RequestBody AnnouncementDto announcementDto) throws NotFoundException {
         Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
-        return objectMapper.convertValue(interfaceBuisness.createAnnouncement(announcement), AnnouncementDto.class);
+        return objectMapper.convertValue(interfaceBuisness.createAnnouncement(id,announcement), AnnouncementDto.class);
     }
 
     @GetMapping("/read/one")
@@ -46,10 +45,9 @@ public class BuisnessController {
         return objectMapper.convertValue(interfaceBuisness.update(id, announcement), AnnouncementDto.class);
     }
 
-    @GetMapping("/read/all")
-    public List<AnnouncementDto> readAll(@RequestBody UserDto userDto) throws NotFoundException {
-        User user = objectMapper.convertValue(userDto, User.class);
-        return interfaceBuisness.readAll(user).stream()
+    @GetMapping("/readall/{id}")
+    public List<AnnouncementDto> readAllAnnoucement(@PathVariable(value = "id") String id) throws NotFoundException {
+        return interfaceBuisness.readAllAnnoucement(Long.valueOf(id)).stream()
                 .map(announcement -> objectMapper.convertValue(announcement, AnnouncementDto.class))
                 .collect(Collectors.toList());
 
@@ -57,38 +55,42 @@ public class BuisnessController {
 
     @ResponseBody
     @PostMapping("/update/coment")
-    public ComentDto coment(@RequestParam("id") Long id,@RequestBody ComentDto comentDto) {
+    public ComentDto coment(@RequestParam("id") Long id, @RequestBody ComentDto comentDto) {
         Coment coment = objectMapper.convertValue(comentDto, Coment.class);
-        return objectMapper.convertValue(interfaceBuisness.createComent(id,coment), ComentDto.class);
+
+       return objectMapper.convertValue(interfaceBuisness.createComent(id, coment), ComentDto.class);
 
     }
+
     @ResponseBody
     @PostMapping("/add/best")
-    public BestAnnouncementDto addZakladka(@RequestParam("id") Long id,@RequestBody UserDto userDto) throws NotFoundException {
-      //  Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
-        User user = objectMapper.convertValue(userDto, User.class);
-        return objectMapper.convertValue(interfaceBuisness.addAnnouncementInBestAnnouncement(id,user),BestAnnouncementDto.class);
-       // @RequestBody UserDto userDto
+    public BestAnnouncementDto addZakladka(@RequestParam("id") Long id, @RequestParam("userId") Long userId) throws NotFoundException {
+
+        return objectMapper.convertValue(interfaceBuisness.addAnnouncementInBestAnnouncement(id, userId), BestAnnouncementDto.class);
+
     }
+
     @ResponseBody
     @PostMapping("/creditcart")
-    public CreditCartDto createCreditcart(@RequestBody UserDto userDto) throws NotFoundException {
-        User user = objectMapper.convertValue(userDto, User.class);
-        return objectMapper.convertValue(interfaceBuisness.createCreditCart(user),CreditCartDto.class);
+    public CreditCartDto createCreditcart(@RequestParam("id") Long id) throws NotFoundException {
+
+        return objectMapper.convertValue(interfaceBuisness.createCreditCart(id), CreditCartDto.class);
 
     }
+
     @ResponseBody
     @PutMapping("/add/balance")
-    public UserDto addBalance(@RequestBody UserDto userDto) throws NotFoundException {
-        User user = objectMapper.convertValue(userDto, User.class);
-        return objectMapper.convertValue(interfaceBuisness.addBalance(user), UserDto.class);
+    public UserDto addBalance(@RequestParam("userId") Long userId) throws NotFoundException {
+
+        return objectMapper.convertValue(interfaceBuisness.addBalance(userId), UserDto.class);
 
     }
+
     @ResponseBody
     @PutMapping("/getup")
-    public AnnouncementDto getup(@RequestBody AnnouncementDto announcementDto) throws NotFoundException {
-       Announcement announcement= objectMapper.convertValue(announcementDto,Announcement.class);
-        return objectMapper.convertValue(interfaceBuisness.getUpAnnoncement(announcement), AnnouncementDto.class);
+    public AnnouncementDto getup(@RequestParam("id") Long id,@RequestParam("money") int money,@RequestParam("id") Long userId) throws NotFoundException {
+
+        return objectMapper.convertValue(interfaceBuisness.getUpAnnoncementMoney(id,money,userId), AnnouncementDto.class);
 
     }
 }

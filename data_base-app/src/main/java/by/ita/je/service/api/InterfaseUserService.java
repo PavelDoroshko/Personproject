@@ -15,4 +15,5 @@ public interface InterfaseUserService {
     void deleteById(Long id) throws NotFoundException, IncorrectDataException;
 
     List<User> readAll();
+    User readOneByLogin(String login);
 }

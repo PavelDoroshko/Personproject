@@ -1,6 +1,5 @@
 package by.ita.je.module;
 
-import by.ita.je.module.Announcement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -20,13 +20,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_id;
-    private String name;
+    private String login;
     private int balance;
     private int pasword;
 
-    @OneToMany( orphanRemoval = true, cascade ={ CascadeType.ALL},mappedBy = "user",fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Announcement> announcementList;
+    @OneToMany( orphanRemoval = false, cascade ={ CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<Announcement> announcementList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore

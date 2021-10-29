@@ -5,6 +5,7 @@ import by.ita.je.module.*;
 import by.ita.je.service.api.InterfaceBuisness;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,43 +25,32 @@ public class BuisnessService implements InterfaceBuisness {
     private final CreditCartService creditCartService;
     private final UserDao userDao;
 
-    @Override
-    @Transactional
-    public Announcement createAnnouncement(User user) {
-        List<Announcement> announcementList = new ArrayList<>();
-        Announcement announcement = Announcement.builder()
-                .get_up(0)
-                .numberPhone(0)
-                .build();
-        announcement.setUser(user);
-        // createComent(announcement);
-        announcementList.add(announcement);
-        Announcement announcementNew = announcementService.create(announcement);
-        user.setAnnouncementList(announcementList);
-        return announcementNew;
-    }
+
 
     @Override
     @Transactional
-    public Announcement createAnnouncement(Announcement announcement) throws NotFoundException {
+    public Announcement createAnnouncement(Long id,Announcement announcement) throws NotFoundException {
+        User user = userService.readOne(id);
+        List<Announcement> announcementList =user.getAnnouncementList();
+        Announcement announcement1 = announcementService.create(announcement);
         Car car = carService.create(announcement.getCar());
         Coment coment = comentService.create(announcement.getComent());
-        announcement.setComent(coment);
-        announcement.setCar(car);
-        announcement.setUser(announcement.getUser());
-        return announcementService.create(announcement);
+        announcement1.setComent(coment);
+        announcement1.setCar(car);
+        announcementList.add(announcement1);
+        user.setAnnouncementList(announcementList);
+       userService.create(user);
+        return announcement1;
     }
 
     @Override
     @Transactional
     public Announcement update(Long id, Announcement announcement) {
-        Announcement announcementFind = announcementService.readOne(id);
         Announcement announcementUpdate = announcementService.update(id, announcement);
         Car carUpdate = carService.update(announcementUpdate.getCar().getId(), announcement.getCar());
         Coment coment = comentService.update(announcementUpdate.getComent().getId(), announcement.getComent());
         announcementUpdate.setCar(carUpdate);
         announcementUpdate.setComent(coment);
-        //Announcement announcementUpdate = announcementService.update(id, announcementFind);
         return announcementUpdate;
     }
 
@@ -74,8 +64,9 @@ public class BuisnessService implements InterfaceBuisness {
 
     @Override
     @Transactional
-    public List<Announcement> readAll(User user) throws NotFoundException {
-        User userFind = userService.readOne(user.getUser_id());
+    public List<Announcement> readAllAnnoucement (Long id) throws NotFoundException {
+
+        User userFind = userService.readOne(id);
 
         List<Announcement> announcementListUser = userFind.getAnnouncementList();
 
@@ -104,47 +95,44 @@ public class BuisnessService implements InterfaceBuisness {
 
     @Override
     @Transactional
-    public BestAnnouncement addAnnouncementInBestAnnouncement(Long id, User user) throws NotFoundException {
-        List<BestAnnouncement> bestAnnouncementList = new ArrayList<>();
+    public BestAnnouncement addAnnouncementInBestAnnouncement(Long id, Long userId) throws NotFoundException {
+        User user = userService.readOne(userId);
+        List<BestAnnouncement> bestAnnouncementList = user.getBestAnnouncements();
         Announcement findAnnoucment = announcementService.readOne(id);
         BestAnnouncement bestAnnouncemet = BestAnnouncement.builder()
                 .announcement(findAnnoucment)
                 .build();
+        bestAnnouncementService.create(bestAnnouncemet);
         bestAnnouncementList.add(bestAnnouncemet);
         user.setBestAnnouncements(bestAnnouncementList);
-        return bestAnnouncementService.create(bestAnnouncemet);
+        userService.create(user);
+        return bestAnnouncemet;
     }
 
 
     @Override
     @Transactional
-    public CreditCart createCreditCart(User user) throws NotFoundException {
-        User userNew = userService.readOne(user.getUser_id());
-        //int cashNew = (int) (Math.random() * 1000);
+    public CreditCart createCreditCart(Long id) throws NotFoundException {
+        User userNew = userService.readOne(id);
         int cashNew = 500;
         CreditCart creditCart = CreditCart.builder()
                 .cash(cashNew)
                 .build();
         creditCartService.create(creditCart);
         userNew.setCreditCart(creditCart);
-       // userService.create(userNew);
         return creditCart;
     }
 
 
     @Override
     @Transactional
-    public User addBalance(User user) throws NotFoundException {
-        User userNew = userService.readOne(user.getUser_id());
+    public User addBalance(Long userId) throws NotFoundException {
+        User userNew = userService.readOne(userId);
         CreditCart creditCart = userNew.getCreditCart();
         int cash = creditCart.getCash();
         int balance = userNew.getBalance();
-        //if (cash > balance) {
             balance = balance + 20;
             cash = cash - 20;
-      //  } else {
-           // throw new NotFoundException("CashAdd");
-     //   }
         creditCart.setCash(cash);
         userNew.setBalance(balance);
 
@@ -162,10 +150,25 @@ public class BuisnessService implements InterfaceBuisness {
         int get_up = announcementFind.getGet_up() + announcement.getGet_up();
         announcementFind.setGet_up(get_up);
         user.setBalance(balance);
-        //announcementService.update(announcement.getId(),announcementFind);
 
         return announcementService.update(announcement.getId(), announcementFind);
     }
+
+    @SneakyThrows
+    @Override
+    @Transactional
+    public Announcement getUpAnnoncementMoney(Long id,int money,Long userId) {
+        Announcement announcementFind = announcementService.readOne(id);
+        User user = userService.readOne(userId);
+        int balance = user.getBalance() - money;
+        int get_up = announcementFind.getGet_up() + money;
+        announcementFind.setGet_up(get_up);
+        user.setBalance(balance);
+        return announcementService.update(id, announcementFind);
+    }
+
+
+
 }
 
 

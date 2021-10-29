@@ -29,7 +29,7 @@ class UserServiceTest {
     private UserService userService;
 
     private static User userGiven = User.builder()
-            .name("pavel")
+            .login("pavel")
             .balance(0)
             .pasword(123)
             .build();
