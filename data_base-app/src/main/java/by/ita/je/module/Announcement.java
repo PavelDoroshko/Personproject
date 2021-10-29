@@ -23,13 +23,15 @@ public class Announcement {
     private int get_up;
     private  int numberPhone;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+   // @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+   @OneToOne
     private Car car;
 
-   //@ManyToOne(  cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
-   //@ManyToOne( cascade = {CascadeType.MERGE})
-   // @JoinColumn(name="user_user_id")
-   @ManyToOne(  cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+
+
+  // @ManyToOne(  cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH})
+  //@JoinColumn(name="user_user_id")
+    @ManyToOne( fetch = FetchType.EAGER)
    private User user;
 
    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)

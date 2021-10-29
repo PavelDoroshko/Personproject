@@ -4,6 +4,7 @@ import by.ita.je.dto.*;
 import by.ita.je.module.Announcement;
 import by.ita.je.module.Coment;
 import by.ita.je.module.User;
+import by.ita.je.service.api.InterfaceAnnouncement;
 import by.ita.je.service.api.InterfaceBuisness;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javassist.NotFoundException;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class BuisnessController {
     private final ObjectMapper objectMapper;
     private final InterfaceBuisness interfaceBuisness;
-
+    private final InterfaceAnnouncement interfaceAnnouncement;
     @ResponseBody
     @PostMapping("/create")
     public AnnouncementDto createAnnouncement(@RequestParam("id") long id,@RequestBody AnnouncementDto announcementDto) throws NotFoundException {
@@ -27,22 +28,17 @@ public class BuisnessController {
         return objectMapper.convertValue(interfaceBuisness.createAnnouncement(id,announcement), AnnouncementDto.class);
     }
 
-    @GetMapping("/read/one")
-    public AnnouncementDto readOne(@RequestParam("id") long id) throws NotFoundException {
-
-        return null;
-    }
 
     @DeleteMapping(value = "/delete")
     public void deleteById(@RequestParam(value = "id", required = false) String id) {
         interfaceBuisness.deleteById(Long.valueOf(id));
     }
 
-    @PutMapping("/update")
-    public AnnouncementDto update(@RequestParam("id") Long id,
+    @PutMapping("/update/{id}")
+    public AnnouncementDto update(@PathVariable("id") String id,
                                   @RequestBody AnnouncementDto announcementDto) throws NotFoundException {
         Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);
-        return objectMapper.convertValue(interfaceBuisness.update(id, announcement), AnnouncementDto.class);
+        return objectMapper.convertValue(interfaceBuisness.update(Long.valueOf(id), announcement), AnnouncementDto.class);
     }
 
     @GetMapping("/readall/{id}")
@@ -51,6 +47,10 @@ public class BuisnessController {
                 .map(announcement -> objectMapper.convertValue(announcement, AnnouncementDto.class))
                 .collect(Collectors.toList());
 
+    }
+    @GetMapping("/read/one")
+    public AnnouncementDto readOne(@RequestParam("id") Long id) throws NotFoundException {
+        return objectMapper.convertValue(  interfaceAnnouncement.readOne(id), AnnouncementDto.class);
     }
 
     @ResponseBody

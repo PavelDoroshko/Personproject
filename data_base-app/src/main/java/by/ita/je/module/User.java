@@ -24,8 +24,8 @@ public class User {
     private int balance;
     private int pasword;
 
-    @OneToMany( orphanRemoval = false, cascade ={ CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @OneToMany(  cascade ={CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+     @JoinColumn(name = "user_id")
     private List<Announcement> announcementList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)

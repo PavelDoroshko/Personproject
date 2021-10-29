@@ -14,13 +14,12 @@
 
 
 
-<form id="home" method="get" ></form>
+
 <form id="findById" method="get">
-  <input name="user_id" type="text" th:value= "${userdLogin.user_id}" user_id="user_id" hidden="true"/>
+  <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
 </form>
-<button type="submit" form="home"  formaction="/data_base-app//" >На главную страницу</button>
-<button type="submit" form="findById" formaction="/web-app/update" >Изменить</button>
 <button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все</button>
+
 
 <h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
 <table border="1" width="65%" cellpadding="5">

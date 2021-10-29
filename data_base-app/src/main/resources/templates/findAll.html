@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>AnnouncementList</title>
+    <style>
+    body {
+      background-color: #11AA99;
+    }
+  </style>
 </head>
 <body>
-<form method="get" action="/web-app/">
-    <button type="submit">Вернуться в кабинет пользователя</button>
+<form method="get" action="/data_base-app//">
+    <button type="submit">Вернуться </button>
 </form>
 <p>
 <div th:if="${not #lists.isEmpty(announcements)}">
     <div th:each="announcement : ${announcements}">
-        <form id="FindById" method="get">
+        <form id="findById" method="get">
             <input name="id" type="text" th:value= "${announcement.id}" id="id" hidden="true"/>
-            <button type="submit" form="FindById" formaction="/web-app/update" >Редактировать</button>
+            <button type="submit" form="findById" formaction="/data_base-app/update" >Редактировать</button>
             <p>
-            <button type="submit" form="FindById" formaction="/web-app/delete" >Удалить</button>
+            <button type="submit" form="findById" formaction="/web-app/delete" >Удалить</button>
             <p>
-            <button type="submit" form="FindById" formaction="/web-app/comente" >Комментировать</button>
+            <button type="submit" form="findById" formaction="/web-app/comente" >Комментировать</button>
             <p>
         </form>
         <p th:text="'ID: ' + ${announcement.id}"></p>
