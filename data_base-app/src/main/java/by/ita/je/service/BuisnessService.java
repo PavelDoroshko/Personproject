@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.UserDao;
+import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.module.*;
 import by.ita.je.service.api.InterfaceBuisness;
 import javassist.NotFoundException;
@@ -147,15 +148,16 @@ creditCartService.create(creditCart);
 
     @Override
     @Transactional
-    public Announcement getUpAnnoncement(Announcement announcement) {
+    public Announcement getUpAnnoncement(long userId, AnnouncementDto announcement) {
+        int money = 3;
         Announcement announcementFind = announcementService.readOne(announcement.getId());
         User user = announcementFind.getUser();
         List<Announcement> announcementList = user.getAnnouncementList();
-        int balance = user.getBalance() - announcement.getGet_up();
-        int get_up = announcementFind.getGet_up() + announcement.getGet_up();
+        int balance = user.getBalance() - money;
+        int get_up = announcementFind.getGet_up() + money;
         announcementFind.setGet_up(get_up);
         user.setBalance(balance);
-
+userService.create(user);
         return announcementService.update(announcement.getId(), announcementFind);
     }
 

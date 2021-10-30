@@ -1,5 +1,6 @@
 package by.ita.je.service.api;
 
+import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.module.*;
 import javassist.NotFoundException;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface InterfaceBuisness {
     public Announcement createAnnouncement(Long id,Announcement announcement) throws NotFoundException;
-    Announcement getUpAnnoncement (Announcement announcement);
+    Announcement getUpAnnoncement (long userId, AnnouncementDto announcement);
 
     User  addBalance (Long id) throws NotFoundException;
 

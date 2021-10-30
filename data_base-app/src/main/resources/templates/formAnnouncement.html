@@ -15,7 +15,31 @@
     <input name="id" type="text" th:value= "${userId}" id ="id" hidden="true"/>
 </form>
 <button type="submit" form="formAnnouncement" formaction="/data_base-app/findUserById" >вернуться в личный кабинет</button>
+<form id="formAnnouncement" method="get">
+    <input name="id" type="text" th:value= "${announcementd.id}" id ="id" hidden="true"/>
+</form>
+<button type="submit" form="formAnnouncement" formaction="/data_base-app/__${userId}"__/update" >редактировать объявление</button>
 
+<form action="#" th:action="@{/__${userId}__/getUpAnnouncement}" th:object="${announcement}" method="get">
+
+<p><input type="submit" value="Найти" /> <input type="reset" value="Отменить" /></p>
+</form>
+
+
+<p th:text="'ID: ' + ${announcementd.id}"></p>
+<p th:text="'статус: ' + ${announcementd.get_up}"></p>
+<p th:text="'номер телефона: ' + ${announcementd.numberPhone}"></p>
+<p th:text="'марка автомобиля: ' + ${announcementd.car.nameCar}"></p>
+<p th:text="'модель автомобиля:' + ${announcementd.car.modelCar}"></p>
+<p th:text="'цена:' + ${announcementd.car.price}"></p>
+<p th:text="'год выпуска:' + ${announcementd.car.yearOfIssue}"></p>
+<p th:text="'пробег:' + ${announcementd.car.milage}"></p>
+<p th:text="'объем двигателя:' + ${announcementd.car.volumeEngine}"></p>
+<p th:text="'тип двигателя:' + ${announcementd.car.typeEngine}"></p>
+<p th:text="'коробка:' + ${announcementd.car.transmission}"></p>
+<p th:text="'регион:' + ${announcementd.car.location}"></p>
+<p th:text="'растаможка:' + ${announcementd.car.custom}"></p>
+<p th:text="'обмен:' + ${announcementd.car.exchange}"></p>
 
 
 

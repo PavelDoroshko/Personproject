@@ -29,6 +29,32 @@
   <button type="submit">пополнить баланс</button>
 </form>
 
+<form method="get" th:action="@{/__${userdLogin.user_id}__/findAnnouncementById}">
+  <button type="submit">найти объявление</button>
+</form>
+
+
+<tr>
+  <td>
+    <h2>Найти авто по фильтру:</h2>
+    <form id="field2" method="get">
+      <label for="id">ид: </label>
+      <input type="text" id="id" name="id"  pattern="(^[0-9]{0,7})+$"/>
+
+    </form>
+    <br>
+    <p>
+    <form id="findById" method="get">
+      <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
+    </form>
+      <button type="submit" form="field2" formaction="/data_base-app/findAnnouncementById"  >Найти обьявление</button>
+    </p>
+  </td>
+</tr>
+</table>
+
+
+
 <p>
 <h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
 <table border="1" width="45%" cellpadding="5">

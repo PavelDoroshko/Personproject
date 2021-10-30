@@ -9,6 +9,7 @@ import by.ita.je.module.CreditCart;
 import by.ita.je.module.User;
 import by.ita.je.service.api.InterfaceAnnouncement;
 import by.ita.je.service.api.InterfaceBuisness;
+
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
@@ -71,11 +72,12 @@ public class webController {
 
         return "findAll";
     }
-    @GetMapping(value = "/update")
-    public String update(@RequestParam(value = "id", required = false) Long id, Model model){
+    @GetMapping(value = "/{userId}/update")
+    public String update(@PathVariable("userId") long userId,@RequestParam(value = "id", required = false) Long id, Model model){
 
         AnnouncementDto announcementDto = restTemplate.getForObject(baseUrl + "buisness/"+"read/" +"one?id="+ id, AnnouncementDto.class);
         model.addAttribute("announcementd",  announcementDto);
+        model.addAttribute("userId", userId);
         return "formUpdate";
     }
     @PostMapping(value = "/updatedAnnouncement")
@@ -107,7 +109,7 @@ public class webController {
     }
     @SneakyThrows
     @PostMapping(value = "{userId}/createCreditCart")
-    public String createCreditCart(@PathVariable(value = "userId", required = false) long userId, Model model){
+    public String createCreditCart(@RequestParam(value = "userId", required = false) long userId, Model model){
         CreditCart response =interfaceBuisness.createCreditCart(userId);
         model.addAttribute("creditCart", response);
         model.addAttribute("userId", userId);
@@ -122,9 +124,24 @@ public class webController {
         return "findById";
     }
     @SneakyThrows
-    @GetMapping(value = "{userId}/findAnnouncementById")
-    public String findAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
+    @GetMapping(value = "/{userId}/findAnnouncementById")
+    public String findAnnouncement(@PathVariable("userId") String userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
+        model.addAttribute("announcementd", new AnnouncementDto());
+        model.addAttribute("userId", userId);
+        return "formForFindAnnouncement";
+    }
+    @SneakyThrows
+    @GetMapping(value = "/{userId}/newFindAnnouncement")
+    public String findedAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
         Announcement response = interfaceAnnouncement.readOne(announcementDto.getId());
+        model.addAttribute("announcementd", response);
+        model.addAttribute("userId", userId);
+        return "formAnnouncement";
+    }
+    @SneakyThrows
+    @GetMapping(value = "/{userId}/getUpAnnouncement")
+    public String getUpAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
+        Announcement response = interfaceBuisness.getUpAnnoncement(userId,announcementDto);
         model.addAttribute("announcementd", response);
         model.addAttribute("userId", userId);
         return "formAnnouncement";
