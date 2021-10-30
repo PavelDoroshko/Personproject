@@ -13,13 +13,15 @@
 
 
 
-
-
 <form id="findById" method="get">
   <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
 </form>
 <button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все</button>
-
+<p>
+<form method="get" action="/data_base-app/createAnnouncement">
+    <button type="submit">создать новое обьявление</button>
+</form>
+<p>
 
 <h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
 <table border="1" width="65%" cellpadding="5">

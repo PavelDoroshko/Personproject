@@ -8,11 +8,13 @@
       background-color: #11AA99;
     }
   </style>
+    <a onclick="javascript:history.back(-4); return false;">Назад</a>
 </head>
 <body>
 <form method="get" action="/data_base-app//">
     <button type="submit">Вернуться </button>
 </form>
+<input type="button" onclick="history.back(-4); return false;" value="Назад"/>
 <p>
 <div th:if="${not #lists.isEmpty(announcements)}">
     <div th:each="announcement : ${announcements}">

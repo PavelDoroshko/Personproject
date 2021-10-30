@@ -34,7 +34,7 @@ public class BuisnessController {
         interfaceBuisness.deleteById(Long.valueOf(id));
     }
 
-    @PutMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public AnnouncementDto update(@PathVariable("id") String id,
                                   @RequestBody AnnouncementDto announcementDto) throws NotFoundException {
         Announcement announcement = objectMapper.convertValue(announcementDto, Announcement.class);

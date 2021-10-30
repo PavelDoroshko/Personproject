@@ -74,11 +74,22 @@ public class webController {
     @PostMapping(value = "/updatedAnnouncement")
     public String updated(@ModelAttribute  AnnouncementDto announcementDto, Model model){
         model.addAttribute("announcementd", announcementDto);
-          restTemplate.put(baseUrl + "buisness"+"/update/" + announcementDto.getId(), announcementDto,  AnnouncementDto.class);
-
-        return "findById";
+        AnnouncementDto response =restTemplate.postForObject(baseUrl + "buisness"+"/update/" + announcementDto.getId(), announcementDto,  AnnouncementDto.class);
+        //model.addAttribute("userdLogin", response.getUser());
+        return "findAll";
     }
-
+    @GetMapping(value = "/createAnnouncement")
+    public String createAnnouncement(Model model) {
+        model.addAttribute("announcementd", new AnnouncementDto());
+        return "formForCreateAnnouncement";
+    }
+    @PostMapping(value = "/newAnnouncement")
+    public String createdAnnouncement(@ModelAttribute AnnouncementDto announcementDto, Model model) {
+        AnnouncementDto response =
+                restTemplate.postForObject(baseUrl + "buisness/"+"/create?id=" + announcementDto.getUser().getUser_id(), announcementDto,AnnouncementDto.class);
+        model.addAttribute("announcementd", response);
+        return "formAnnouncement";
+    }
 
     @ModelAttribute("userdLogin")
 private UserDto userDto (){
