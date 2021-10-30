@@ -30,8 +30,8 @@ public class UserController {
         return objectMapper.convertValue(interfaseUserService.create(user), UserDto.class);
     }
     @GetMapping("/read/one")
-    public UserDto readOne(@RequestParam("pasword") long pasword) throws NotFoundException {
-        return objectMapper.convertValue(interfaseUserService.readOne(pasword), UserDto.class);
+    public UserDto readOne(@RequestParam("id") long id) throws NotFoundException {
+        return objectMapper.convertValue(interfaseUserService.readOne(id), UserDto.class);
     }
 
     @SneakyThrows

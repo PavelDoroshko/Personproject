@@ -11,11 +11,10 @@
 </head>
 <body>
 <h1>Создание новой объявления</h1>
-<form action="#" th:action="@{/newAnnouncement}" th:object="${announcement}" method="post">
++<form action="#" th:action="@{/__${userId}__/newAnnouncement}" th:object="${announcement}" method="post">
   телефон: <input type="text" th:field="${announcementd.numberPhone}" pattern="(^[0-9]{0,7})+$" required/>
   марка: <input type="text" th:field="${announcementd.car.nameCar}" pattern="^[a-zA-Z]+$" required/>
   модель: <input type="text" th:field="${announcementd.car.modelCar}" pattern="^[a-zA-Z]+$" required/>
-  текст: <input type="text" th:field="${announcementd.coment.message}" pattern="^[a-zA-Z]+$" required/>
   <p><input type="submit" value="Создать" /> <input type="reset" value="Отменить" /></p>
 </form>
 <br>

@@ -1,9 +1,16 @@
 package by.ita.je.controller;
 
 import by.ita.je.dto.AnnouncementDto;
+import by.ita.je.dto.CreditCartDto;
 import by.ita.je.dto.SearchDto;
 import by.ita.je.dto.UserDto;
+import by.ita.je.module.Announcement;
+import by.ita.je.module.CreditCart;
+import by.ita.je.module.User;
+import by.ita.je.service.api.InterfaceAnnouncement;
+import by.ita.je.service.api.InterfaceBuisness;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,8 +27,8 @@ import java.util.Objects;
 public class webController {
     private final RestTemplate restTemplate;
     private final String baseUrl = "http://localhost:8003/data_base-app/";
-
-
+    private final InterfaceBuisness interfaceBuisness;
+    private final InterfaceAnnouncement interfaceAnnouncement;
     @GetMapping("/")
     public String home(){
         return "home";
@@ -59,7 +66,7 @@ public class webController {
 
         List<AnnouncementDto> list  =  Arrays.asList(restTemplate
                 .getForObject(baseUrl + "/buisness"+"/readall/"+id , AnnouncementDto[].class));
-       // List<AnnouncementDto> list =  Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
+        // List<AnnouncementDto> list =  Arrays.asList(Objects.requireNonNull(responseEntity.getBody()));
         model.addAttribute("announcements", list);
 
         return "findAll";
@@ -78,19 +85,50 @@ public class webController {
         //model.addAttribute("userdLogin", response.getUser());
         return "findAll";
     }
-    @GetMapping(value = "/createAnnouncement")
-    public String createAnnouncement(Model model) {
+     @GetMapping(value = "/{userId}/createAnnouncement")
+   public String createAnnouncement(@PathVariable("userId") long userId, Model model) {
         model.addAttribute("announcementd", new AnnouncementDto());
+                model.addAttribute("userId", userId);
         return "formForCreateAnnouncement";
     }
-    @PostMapping(value = "/newAnnouncement")
-    public String createdAnnouncement(@ModelAttribute AnnouncementDto announcementDto, Model model) {
+    @PostMapping(value = "/{userId}/newAnnouncement")
+    public String createdAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
         AnnouncementDto response =
-                restTemplate.postForObject(baseUrl + "buisness/"+"/create?id=" + announcementDto.getUser().getUser_id(), announcementDto,AnnouncementDto.class);
+                restTemplate.postForObject(baseUrl + "buisness/"+"/create?id=" + userId, announcementDto,AnnouncementDto.class);
         model.addAttribute("announcementd", response);
+        model.addAttribute("userId", userId);
         return "formAnnouncement";
     }
-
+    @GetMapping(value = "/findUserById")
+    public String findUserById(@RequestParam(value = "id", required = false) String id, Model model){
+        ResponseEntity responseEntity = restTemplate.getForEntity(baseUrl + "user/"+"read/"+"one?id="+id, UserDto.class);
+        model.addAttribute("userdLogin", responseEntity.getBody());
+        return "findById";
+    }
+    @SneakyThrows
+    @PostMapping(value = "{userId}/createCreditCart")
+    public String createCreditCart(@PathVariable(value = "userId", required = false) long userId, Model model){
+        CreditCart response =interfaceBuisness.createCreditCart(userId);
+        model.addAttribute("creditCart", response);
+        model.addAttribute("userId", userId);
+        return "creditCart";
+    }
+    @SneakyThrows
+    @GetMapping(value = "{userId}/addBalance")
+    public String addBalance(@PathVariable(value = "userId", required = false) long userId, Model model){
+       // ResponseEntity responseEntity = restTemplate.getForEntity(baseUrl + "user/"+"read/"+"one?id="+id, UserDto.class);
+       User user = interfaceBuisness.addBalance(userId);
+        model.addAttribute("userdLogin", user);
+        return "findById";
+    }
+    @SneakyThrows
+    @GetMapping(value = "{userId}/findAnnouncementById")
+    public String findAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model) {
+        Announcement response = interfaceAnnouncement.readOne(announcementDto.getId());
+        model.addAttribute("announcementd", response);
+        model.addAttribute("userId", userId);
+        return "formAnnouncement";
+    }
     @ModelAttribute("userdLogin")
 private UserDto userDto (){
     return new UserDto();

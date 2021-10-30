@@ -114,13 +114,18 @@ public class BuisnessService implements InterfaceBuisness {
     @Transactional
     public CreditCart createCreditCart(Long id) throws NotFoundException {
         User userNew = userService.readOne(id);
+        CreditCart creditCartOld = new CreditCart();
+        if(userNew.getCreditCart()==null){
         int cashNew = 500;
-        CreditCart creditCart = CreditCart.builder()
+        CreditCart creditCartNew = CreditCart.builder()
                 .cash(cashNew)
                 .build();
-        creditCartService.create(creditCart);
-        userNew.setCreditCart(creditCart);
-        return creditCart;
+        creditCartService.create(creditCartNew);
+        userNew.setCreditCart(creditCartNew);
+            return creditCartNew;
+        }
+        else{ creditCartOld =userNew.getCreditCart();}
+        return creditCartOld;
     }
 
 
@@ -135,7 +140,7 @@ public class BuisnessService implements InterfaceBuisness {
             cash = cash - 20;
         creditCart.setCash(cash);
         userNew.setBalance(balance);
-
+creditCartService.create(creditCart);
         return userNew;
     }
 
