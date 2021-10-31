@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS announcement;
 DROP TABLE IF EXISTS car;
 DROP TABLE IF EXISTS coment;
-
+DROP TABLE IF EXISTS best_announcement;
 
 CREATE TABLE user (
                      user_id long  NOT NULL AUTO_INCREMENT,
@@ -67,7 +67,6 @@ CREATE TABLE credit_cart (
  CREATE TABLE best_announcement (
                                  id  long NOT NULL AUTO_INCREMENT,
                                  announcement_id long,
-                                 user_user_id long,
                                  user_id long,
                                   PRIMARY KEY (id),
                                   FOREIGN KEY (announcement_id) REFERENCES  announcement (id)

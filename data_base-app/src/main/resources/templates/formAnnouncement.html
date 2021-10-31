@@ -17,13 +17,7 @@
 <button type="submit" form="formAnnouncement" formaction="/data_base-app/findUserById" >вернуться в личный кабинет</button>
 <form id="formAnnouncement" method="get">
     <input name="id" type="text" th:value= "${announcementd.id}" id ="id" hidden="true"/>
-</form>
-<button type="submit" form="formAnnouncement" formaction="/data_base-app/__${userId}"__/update" >редактировать объявление</button>
 
-<form action="#" th:action="@{/__${userId}__/getUpAnnouncement}" th:object="${announcement}" method="get">
-
-<p><input type="submit" value="Найти" /> <input type="reset" value="Отменить" /></p>
-</form>
 
 
 <p th:text="'ID: ' + ${announcementd.id}"></p>
@@ -42,7 +36,7 @@
 <p th:text="'обмен:' + ${announcementd.car.exchange}"></p>
 
 
-
+</form>
 
 </body>
 </html>

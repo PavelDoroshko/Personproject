@@ -13,11 +13,11 @@ public interface InterfaceBuisness {
 
     User  addBalance (Long id) throws NotFoundException;
 
-    CreditCart createCreditCart (Long id) throws NotFoundException;
+    CreditCart createCreditCart (long id) throws NotFoundException;
 
 
 
-    Announcement update(Long id, Announcement announcement) throws NotFoundException;
+    Announcement update(Long id, AnnouncementDto announcement) throws NotFoundException;
 
     List<Announcement> readAllAnnoucement (Long id) throws NotFoundException;
 

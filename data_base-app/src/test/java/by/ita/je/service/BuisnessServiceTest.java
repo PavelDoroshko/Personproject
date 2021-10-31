@@ -59,7 +59,7 @@ class BuisnessServiceTest {
                 "Введены некорректные данные для Announcement");
     }
 
-    @SneakyThrows
+   /* @SneakyThrows
     @Test
     void updateAnnouncement_thenOk() {
         Announcement announcementFirst = Announcement.builder()
@@ -74,16 +74,16 @@ class BuisnessServiceTest {
         Assertions.assertEquals(1111, actual.getNumberPhone());
         Assertions.assertEquals(2, actual.getGet_up());
 
-    }
+    }*/
 
-    @Test
+   /* @Test
     void updateAnnouncement_thenException() {
         Announcement announcement = getAnnouncement();
         NoFoundEntityException runtimeException = Assertions.assertThrows(NoFoundEntityException.class, () -> interfaceBuisness.update(14L, announcement));
         Assertions.assertEquals(runtimeException.getMessage(),
                 "Такой записи для Announcement в базе данных не существует");
 
-    }
+    }*/
 
     @SneakyThrows
     @Test

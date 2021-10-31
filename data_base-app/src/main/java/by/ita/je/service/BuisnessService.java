@@ -46,10 +46,10 @@ public class BuisnessService implements InterfaceBuisness {
 
     @Override
     @Transactional
-    public Announcement update(Long id, Announcement announcement) {
+    public Announcement update(Long id, AnnouncementDto announcement) {
         Announcement announcementUpdate = announcementService.update(id, announcement);
-        Car carUpdate = carService.update(announcementUpdate.getCar().getId(), announcement.getCar());
-        Coment coment = comentService.update(announcementUpdate.getComent().getId(), announcement.getComent());
+        Car carUpdate = carService.update(announcementUpdate.getCar().getId(), announcementUpdate.getCar());
+        Coment coment = comentService.update(announcementUpdate.getComent().getId(), announcementUpdate.getComent());
         announcementUpdate.setCar(carUpdate);
         announcementUpdate.setComent(coment);
         return announcementUpdate;
@@ -101,19 +101,24 @@ public class BuisnessService implements InterfaceBuisness {
         List<BestAnnouncement> bestAnnouncementList = user.getBestAnnouncements();
         Announcement findAnnoucment = announcementService.readOne(id);
         BestAnnouncement bestAnnouncemet = BestAnnouncement.builder()
-                .announcement(findAnnoucment)
-                .build();
+               .announcement(findAnnoucment)
+               .build();
+       // BestAnnouncement bestAnnouncemet = new BestAnnouncement();
+        //bestAnnouncemet.setAnnouncement(findAnnoucment);
+        //bestAnnouncementService.create(bestAnnouncemet);
         bestAnnouncementService.create(bestAnnouncemet);
         bestAnnouncementList.add(bestAnnouncemet);
         user.setBestAnnouncements(bestAnnouncementList);
-        userService.create(user);
-        return bestAnnouncemet;
+       // userService.create(user);
+      //  bestAnnouncementService.create(bestAnnouncemet);
+       // return bestAnnouncemet;
+       return bestAnnouncemet;
     }
 
 
     @Override
     @Transactional
-    public CreditCart createCreditCart(Long id) throws NotFoundException {
+    public CreditCart createCreditCart(long id) throws NotFoundException {
         User userNew = userService.readOne(id);
         CreditCart creditCartOld = new CreditCart();
         if(userNew.getCreditCart()==null){
@@ -146,19 +151,21 @@ creditCartService.create(creditCart);
     }
 
 
+    @SneakyThrows
     @Override
     @Transactional
     public Announcement getUpAnnoncement(long userId, AnnouncementDto announcement) {
-        int money = 3;
         Announcement announcementFind = announcementService.readOne(announcement.getId());
-        User user = announcementFind.getUser();
+      //  User user = announcementFind.getUser();
+        User user = userService.readOne(userId);
         List<Announcement> announcementList = user.getAnnouncementList();
-        int balance = user.getBalance() - money;
-        int get_up = announcementFind.getGet_up() + money;
+        int balance = user.getBalance() - announcement.getGet_up();
+        int get_up = announcementFind.getGet_up() + announcement.getGet_up();
         announcementFind.setGet_up(get_up);
         user.setBalance(balance);
 userService.create(user);
-        return announcementService.update(announcement.getId(), announcementFind);
+        //return announcementService.update(announcement.getId(), announcementFind);
+        return announcementService.create(announcementFind);
     }
 
     @SneakyThrows
@@ -171,7 +178,8 @@ userService.create(user);
         int get_up = announcementFind.getGet_up() + money;
         announcementFind.setGet_up(get_up);
         user.setBalance(balance);
-        return announcementService.update(id, announcementFind);
+      // return announcementService.update(id, announcementFind);
+        return announcementService.create( announcementFind);
     }
 
 

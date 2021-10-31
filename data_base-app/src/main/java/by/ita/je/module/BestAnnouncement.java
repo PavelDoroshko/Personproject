@@ -24,10 +24,10 @@ public class BestAnnouncement {
 
     @OneToOne (orphanRemoval = true,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
- //   @JsonIgnore
+   // @JsonIgnore
     private Announcement announcement;
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinColumn(name="user_user_id")
+    @JoinColumn(name="user_id")
     private User user;
 }

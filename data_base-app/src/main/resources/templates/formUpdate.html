@@ -13,8 +13,8 @@
 <body>
 <h1>Внесите данные для редактирования:</h1>
 <h2>Объявление:</h2>
-<form th:action="@{/updatedAnnouncement}" th:object="${announcementd}" method="post">
-  <p>id: <input size="2" type="text"  th:field= "${announcementd.id}" readonly/>
+<form action="#" th:action="@{/__${userId}__/newAnnouncement}" th:object="${announcement}" method="post">
+  <p>id: <input size="2" type="text"  th:field= "${announcementd.id}" pattern="(^[0-9]{0,7})+$" required/>
   <p>
     номер телефона: <input type="text" th:field="${announcementd.numberPhone}" pattern="(^[0-9]{0,7})+$" required/>
   </p>

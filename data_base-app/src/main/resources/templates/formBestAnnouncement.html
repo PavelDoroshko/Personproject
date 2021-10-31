@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>formBestAnnouncement</title>
+    <style>
+    body {
+      background-color: #00CC66;
+    }
+  </style>
+</head>
+<body>
+
+<form id="formAnnouncement" method="get">
+    <input name="id" type="text" th:value= "${userId}" id ="id" hidden="true"/>
+</form>
+<button type="submit" form="formAnnouncement" formaction="/data_base-app/findUserById" >вернуться в личный кабинет</button>
+<form id="formBestAnnouncement" method="get">
+
+
+
+
+    <p th:text="'закладка id: ' + ${bestannouncementd.id}"></p>
+    <p th:text="'объявление id: ' + ${bestannouncementd.announcement.id}"></p>
+
+
+
+</form>
+
+</body>
+</html>

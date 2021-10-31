@@ -39,6 +39,6 @@ public class Announcement {
 
     @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
-   // @JsonIgnore
+    @JsonIgnore
     private BestAnnouncement bestAnnouncement;
 }

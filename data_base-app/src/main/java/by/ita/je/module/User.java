@@ -29,7 +29,7 @@ public class User {
     private List<Announcement> announcementList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
-    @JsonIgnore
+    //@JsonIgnore
     private List<BestAnnouncement> bestAnnouncements;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)

@@ -32,9 +32,24 @@
 <form method="get" th:action="@{/__${userdLogin.user_id}__/findAnnouncementById}">
   <button type="submit">найти объявление</button>
 </form>
+<form method="get" th:action="@{/__${userdLogin.user_id}__/getUpAnnouncement}">
+  <button type="submit">поднять объявление</button>
+</form>
+<form method="get" th:action="@{/__${userdLogin.user_id}__/update}">
+  <button type="submit">редактировать</button>
+</form>
+<form method="get" th:action="@{/__${userdLogin.user_id}__/deleteAnnouncement}">
+  <button type="submit">удалить объявление</button>
+</form>
+</form>
+<form method="get" th:action="@{/__${userdLogin.user_id}__/createBestAnnouncement}">
+  <button type="submit">сделать закладку</button>
+</form>
 
-
-<tr>
+<form action="/data_base-app/findAllBestAnnouncement" method="get">
+  <button type="submit">Показать весь список закладок</button>
+</form>
+  <tr>
   <td>
     <h2>Найти авто по фильтру:</h2>
     <form id="field2" method="get">

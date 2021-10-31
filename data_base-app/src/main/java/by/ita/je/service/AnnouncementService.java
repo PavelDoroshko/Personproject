@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.AnnouncementDao;
+import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
 import by.ita.je.module.Announcement;
@@ -33,7 +34,7 @@ public class AnnouncementService implements InterfaceAnnouncement {
 
     @Override
     @Transactional
-    public Announcement update(long id, Announcement announcement) throws NoFoundEntityException {
+    public Announcement update(long id, AnnouncementDto announcement) throws NoFoundEntityException {
         Announcement secondannouncement = announcementDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Announcement"));
         secondannouncement.setGet_up(announcement.getGet_up());
         secondannouncement.setNumberPhone(announcement.getNumberPhone());
