@@ -21,26 +21,18 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int get_up;
-    private  int numberPhone;
+    private int numberPhone;
 
-   // @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-   @OneToOne
+    @OneToOne
     private Car car;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Coment coment;
 
-  // @ManyToOne(  cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH})
-  //@JoinColumn(name="user_user_id")
-    @ManyToOne( fetch = FetchType.EAGER)
-   private User user;
-
-   @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Coment  coment;
-
-    @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @OneToOne(orphanRemoval = true, cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
-   // @JsonIgnore
-  //@OneToOne(cascade = CascadeType.ALL)
-  //@JoinColumn(name="bestAnnouncement_id")
     private BestAnnouncement bestAnnouncement;
 }

@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 public class BestAnnouncementDto {
     private long id;
     private AnnouncementDto announcement;
-    //private User user;
 
 }

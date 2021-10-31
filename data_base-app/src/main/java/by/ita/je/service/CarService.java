@@ -25,13 +25,11 @@ public class CarService implements InterfaceCarService {
 
     @Override
     @Transactional
-    public Car create(Car car) throws IncorrectDataException{
-        if ((car.getNameCar() == "")|| (car.getModelCar() == ""))
-           throw new IncorrectDataException("Car");
-      //  car.setCustom("");
-         // car.setVolumeEngine(0);
-       if ((car.getVolumeEngine()<0)||(car.getMilage()<0))
-           throw new IncorrectDataException("Car");
+    public Car create(Car car) throws IncorrectDataException {
+        if ((car.getNameCar() == "") || (car.getModelCar() == ""))
+            throw new IncorrectDataException("Car");
+        if ((car.getVolumeEngine() < 0) || (car.getMilage() < 0))
+            throw new IncorrectDataException("Car");
         return carDao.save(car);
     }
 
@@ -39,7 +37,7 @@ public class CarService implements InterfaceCarService {
     @Override
     @Transactional
     public Car update(Long id, Car car) {
-         final Car secondCar = carDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Car"));
+        final Car secondCar = carDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Car"));
         secondCar.setNameCar(car.getNameCar());
         secondCar.setModelCar(car.getModelCar());
         secondCar.setCustom(car.getCustom());
@@ -59,7 +57,6 @@ public class CarService implements InterfaceCarService {
                 .stream(result, false)
                 .collect(Collectors.toList());
     }
-
 
 
 }

@@ -59,8 +59,6 @@ class UserControllerTest {
 
     }
 
-
-
     @SneakyThrows
     @Test
     void readAll() {

@@ -15,15 +15,16 @@ import java.util.List;
 
 public class SearchService implements InterfaceSearchService {
     private final SearchDao searchDao;
+
     @Override
-    public List<Announcement> findCriteria(String nameCar, String modelCar,int price,
-                                           String typeEngine,int yearOfIssue,int milage,
-                                           int volumeEngine,String transmission,String location,
-                                           String custom,String exchange) {
-        return searchDao.findByCriteria ( nameCar,  modelCar, price,
-         typeEngine, yearOfIssue, milage,
-       volumeEngine, transmission,location,
-                 custom,exchange);
+    public List<Announcement> findCriteria(String nameCar, String modelCar, int price,
+                                           String typeEngine, int yearOfIssue, int milage,
+                                           int volumeEngine, String transmission, String location,
+                                           String custom, String exchange) {
+        return searchDao.findByCriteria(nameCar, modelCar, price,
+                typeEngine, yearOfIssue, milage,
+                volumeEngine, transmission, location,
+                custom, exchange);
     }
 
 }

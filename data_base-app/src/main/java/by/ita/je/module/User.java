@@ -24,14 +24,13 @@ public class User {
     private int balance;
     private int pasword;
 
-    @OneToMany(  cascade ={CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
-     @JoinColumn(name = "user_id")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private List<Announcement> announcementList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
-    //@JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<BestAnnouncement> bestAnnouncements;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CreditCart creditCart;
 }

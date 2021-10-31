@@ -150,10 +150,6 @@ class BuisnessControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().is2xxSuccessful());
-               // .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(Arrays.asList(announcement)))));
-
-
-
 
     }
 
@@ -219,17 +215,10 @@ class BuisnessControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().is2xxSuccessful());
-               // .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber());
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.message").value("aaa"));
+
     }
 
-    @Test
-    void createCreditcart() {
-    }
 
-    @Test
-    void addBalance() {
-    }
 
     @SneakyThrows
     @Test

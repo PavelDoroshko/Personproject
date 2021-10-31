@@ -16,7 +16,5 @@ public class AnnouncementDto {
     private CarDto car;
     private ComentDto coment;
     private UserDto user;
-  //  private BestAnnouncementDto bestAnnouncement;
-
 
 }

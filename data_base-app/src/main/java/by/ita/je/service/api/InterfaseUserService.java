@@ -10,10 +10,11 @@ public interface InterfaseUserService {
 
     User create(User user) throws IncorrectDataException;
 
-    User readOne(Long id) throws NotFoundException,IncorrectDataException;
+    User readOne(Long id) throws NotFoundException, IncorrectDataException;
 
     void deleteById(Long id) throws NotFoundException, IncorrectDataException;
 
     List<User> readAll();
+
     User readOneByLogin(String login);
 }

@@ -21,8 +21,6 @@ public class Coment {
     private long id;
     private String message;
 
-    //@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
-   // @JoinColumn(name = "announcement_id")
     @OneToOne(cascade = CascadeType.MERGE)
     private Announcement announcement;
 }

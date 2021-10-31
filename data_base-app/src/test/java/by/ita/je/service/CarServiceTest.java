@@ -24,32 +24,34 @@ class CarServiceTest {
     @InjectMocks
     private CarService carService;
 
-private static Car carGiven = Car.builder()
-        .id(1L)
-        .nameCar("Audi")
-        .modelCar("100")
-        .custom("yes")
-        .exchange("no")
-        .location("Brest")
-        .milage(700000)
-        .typeEngine("diesel")
-        .yearOfIssue(20)
-        .transmission("mehanic")
-        .volumeEngine(2)
-        .build();
+    private static Car carGiven = Car.builder()
+            .id(1L)
+            .nameCar("Audi")
+            .modelCar("100")
+            .custom("yes")
+            .exchange("no")
+            .location("Brest")
+            .milage(700000)
+            .typeEngine("diesel")
+            .yearOfIssue(20)
+            .transmission("mehanic")
+            .volumeEngine(2)
+            .build();
     private static Car carGet = Car.builder()
             .nameCar("fiat")
             .build();
-  List<Car> cars = new ArrayList<>();
+    List<Car> cars = new ArrayList<>();
 
     {
         cars.add(carGiven);
-        cars.add(carGet );
+        cars.add(carGet);
     }
+
     @BeforeEach
     public void openMocks() {
         MockitoAnnotations.openMocks(this);
     }
+
     @Test
     void whenCreate_returnCar() {
         Mockito.when(carDao.save(carGiven)).thenReturn(carGiven);
@@ -58,13 +60,14 @@ private static Car carGiven = Car.builder()
         Assertions.assertEquals(expected, actual);
         Mockito.verify(carDao, Mockito.times(1)).save(carGiven);
     }
+
     @Test
     void whenCreate_returnException() {
-        Car car  = Car.builder()
+        Car car = Car.builder()
                 .nameCar("")
                 .build();
         IncorrectDataException incorrectDataException = Assertions
-                .assertThrows(IncorrectDataException.class,()->carService.create(car));
+                .assertThrows(IncorrectDataException.class, () -> carService.create(car));
         Assertions.assertEquals(incorrectDataException.getMessage(),
                 "Введены некорректные данные для Car");
         Mockito.verify(carDao, Mockito.times(0)).save(Mockito.any());
@@ -84,20 +87,22 @@ private static Car carGiven = Car.builder()
 
 
     }
+
     @Test
     void whenUpdate_throwException() {
-        Car car  = Car.builder()
+        Car car = Car.builder()
                 .nameCar("bmw")
                 .build();
         Mockito.when(carDao.findById(4L)).thenReturn(Optional.empty());
-        NoFoundEntityException noEntityException = Assertions.assertThrows( NoFoundEntityException.class,
-                ()->carService.update(4L, car));
+        NoFoundEntityException noEntityException = Assertions.assertThrows(NoFoundEntityException.class,
+                () -> carService.update(4L, car));
         Assertions.assertEquals(noEntityException.getMessage(),
                 "Такой записи для Car в базе данных не существует");
-        Mockito.verify(carDao,Mockito.times(1)).findById(4L);
+        Mockito.verify(carDao, Mockito.times(1)).findById(4L);
         Mockito.verify(carDao, Mockito.times(0)).save(Mockito.any());
 
     }
+
     @Test
     void whenReadAll_returnCars() {
         Mockito.when(carDao.findAll()).thenReturn(cars);
@@ -106,8 +111,6 @@ private static Car carGiven = Car.builder()
         Assertions.assertEquals(expected, actual);
         Mockito.verify(carDao, Mockito.times(1)).findAll();
     }
-
-
 
 
 }

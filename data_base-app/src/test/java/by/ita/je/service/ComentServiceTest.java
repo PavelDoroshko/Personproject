@@ -28,33 +28,36 @@ class ComentServiceTest {
     public void openMocks() {
         MockitoAnnotations.openMocks(this);
     }
+
     @Test
     void whenCreate_returnComent() {
         Mockito.when(comentDAO.save(comentGiven)).thenReturn(comentGiven);
-       Coment actual = comentService.create(comentGiven);
-       Coment expected = comentGiven;
+        Coment actual = comentService.create(comentGiven);
+        Coment expected = comentGiven;
         Assertions.assertEquals(expected, actual);
         Mockito.verify(comentDAO, Mockito.times(1)).save(comentGiven);
     }
+
     @Test
     void whenUpdateComment_returnComment() {
         Mockito.when(comentDAO.findById(1L)).thenReturn(Optional.ofNullable(comentGiven));
         Mockito.when(comentDAO.save(comentGiven)).thenReturn(comentGiven);
-       Coment actual = comentService.update(1L, comentGiven);
+        Coment actual = comentService.update(1L, comentGiven);
         Coment expected = comentGiven;
         Assertions.assertEquals(expected, actual);
         Mockito.verify(comentDAO, Mockito.times(1)).findById(1L);
         Mockito.verify(comentDAO, Mockito.times(1)).save(comentGiven);
 
     }
+
     @Test
     void whenUpdateComment_thenException() {
         Mockito.when(comentDAO.findById(4L)).thenReturn(Optional.empty());
-        NoFoundEntityException noEntityException = Assertions.assertThrows( NoFoundEntityException.class,
-                ()->comentService.update(4L, comentGiven));
+        NoFoundEntityException noEntityException = Assertions.assertThrows(NoFoundEntityException.class,
+                () -> comentService.update(4L, comentGiven));
         Assertions.assertEquals(noEntityException.getMessage(),
                 "Такой записи для Coment в базе данных не существует");
-        Mockito.verify(comentDAO,Mockito.times(1)).findById(4L);
+        Mockito.verify(comentDAO, Mockito.times(1)).findById(4L);
         Mockito.verify(comentDAO, Mockito.times(0)).save(Mockito.any());
 
 

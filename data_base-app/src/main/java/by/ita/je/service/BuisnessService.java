@@ -103,15 +103,9 @@ public class BuisnessService implements InterfaceBuisness {
         BestAnnouncement bestAnnouncemet = BestAnnouncement.builder()
                 .announcement(findAnnoucment)
                 .build();
-        // BestAnnouncement bestAnnouncemet = new BestAnnouncement();
-        //bestAnnouncemet.setAnnouncement(findAnnoucment);
-        //bestAnnouncementService.create(bestAnnouncemet);
         bestAnnouncementService.create(bestAnnouncemet);
         bestAnnouncementList.add(bestAnnouncemet);
         user.setBestAnnouncements(bestAnnouncementList);
-        // userService.create(user);
-        //  bestAnnouncementService.create(bestAnnouncemet);
-        // return bestAnnouncemet;
         return bestAnnouncemet;
     }
 
@@ -163,7 +157,6 @@ public class BuisnessService implements InterfaceBuisness {
         int get_up = announcementFind.getGet_up() + announcement.getGet_up();
         announcementFind.setGet_up(get_up);
         user.setBalance(balance);
-      //  userService.create(user);
         return announcementService.create(announcementFind);
     }
 
@@ -179,14 +172,15 @@ public class BuisnessService implements InterfaceBuisness {
         user.setBalance(balance);
         return announcementService.create(announcementFind);
     }
+
     @Override
-  public User findUserByLoginPasword(String login,int pasword){
+    public User findUserByLoginPasword(String login, int pasword) {
         User user = userService.readOneByLogin(login);
-        if(user.getPasword()!=pasword){
+        if (user.getPasword() != pasword) {
             throw new NoFoundEntityException("User");
         }
         return user;
-  }
+    }
 }
 
 

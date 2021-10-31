@@ -8,30 +8,30 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface InterfaceBuisness {
-    public Announcement createAnnouncement(Long id,Announcement announcement) throws NotFoundException;
-    Announcement getUpAnnoncement (long userId, AnnouncementDto announcement);
+    public Announcement createAnnouncement(Long id, Announcement announcement) throws NotFoundException;
 
-    User  addBalance (Long id) throws NotFoundException;
+    Announcement getUpAnnoncement(long userId, AnnouncementDto announcement);
 
-    CreditCart createCreditCart (long id) throws NotFoundException;
+    User addBalance(Long id) throws NotFoundException;
 
+    CreditCart createCreditCart(long id) throws NotFoundException;
 
 
     Announcement update(Long id, Announcement announcement) throws NotFoundException;
 
-    List<Announcement> readAllAnnoucement (Long id) throws NotFoundException;
+    List<Announcement> readAllAnnoucement(Long id) throws NotFoundException;
 
     void deleteById(long id);
 
     @Transactional
-    Coment createComent(Long id,Coment coment);
+    Coment createComent(Long id, Coment coment);
 
     @Transactional
-    BestAnnouncement addAnnouncementInBestAnnouncement(Long Id,Long userId) throws NotFoundException;
+    BestAnnouncement addAnnouncementInBestAnnouncement(Long Id, Long userId) throws NotFoundException;
 
 
     @Transactional
-    public Announcement getUpAnnoncementMoney(Long id,int money,Long userId);
+    public Announcement getUpAnnoncementMoney(Long id, int money, Long userId);
 
-    User findUserByLoginPasword(String login,int pasword);
+    User findUserByLoginPasword(String login, int pasword);
 }

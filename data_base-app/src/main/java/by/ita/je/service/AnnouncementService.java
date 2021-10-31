@@ -28,7 +28,6 @@ public class AnnouncementService implements InterfaceAnnouncement {
     public Announcement create(Announcement announcement) {
         if ((announcement.getNumberPhone() == 0))
             throw new IncorrectDataException("Announcement");
-     //   announcement.setGet_up(0);
         return announcementDao.save(announcement);
     }
 

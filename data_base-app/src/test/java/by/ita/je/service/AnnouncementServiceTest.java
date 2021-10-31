@@ -24,40 +24,44 @@ class AnnouncementServiceTest {
     private AnnouncementDao announcementDao;
     @InjectMocks
     private AnnouncementService announcementService;
-private  static Announcement announcementGiven = Announcement.builder()
-        .get_up(0)
-         .numberPhone(1233)
-        .build();
+    private static Announcement announcementGiven = Announcement.builder()
+            .get_up(0)
+            .numberPhone(1233)
+            .build();
 
     List<Announcement> announcementList = new ArrayList<>();
 
     {
-       announcementList.add(announcementGiven);
+        announcementList.add(announcementGiven);
 
     }
 
     @BeforeEach
     public void openMocks() {
-        MockitoAnnotations.openMocks(this); }
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
     void createAnnouncement_thenOk() {
         Mockito.when(announcementDao.save(announcementGiven)).thenReturn(announcementGiven);
         Announcement actual = announcementService.create(announcementGiven);
-       Announcement expected = announcementGiven;
+        Announcement expected = announcementGiven;
         Assertions.assertEquals(expected, actual);
         Mockito.verify(announcementDao, Mockito.times(1)).save(announcementGiven);
 
     }
+
     @Test
     void createAnnouncement_thenException() {
-       Announcement announcement  =Announcement.builder().numberPhone(0).build();
+        Announcement announcement = Announcement.builder().numberPhone(0).build();
         IncorrectDataException incorrectDataException = Assertions
-                .assertThrows(IncorrectDataException.class,()->announcementService.create(announcement));
+                .assertThrows(IncorrectDataException.class, () -> announcementService.create(announcement));
         Assertions.assertEquals(incorrectDataException.getMessage(),
                 "Введены некорректные данные для Announcement");
         Mockito.verify(announcementDao, Mockito.times(0)).save(Mockito.any());
 
     }
+
     @Test
     void updateAnnouncement_thenOk() {
         Announcement announcementGet = Announcement.builder()
@@ -65,28 +69,30 @@ private  static Announcement announcementGiven = Announcement.builder()
                 .build();
         Mockito.when(announcementDao.findById(1L)).thenReturn(Optional.ofNullable(announcementGiven));
         Mockito.when(announcementDao.save(announcementGiven)).thenReturn(announcementGet);
-       Announcement actual = announcementService.update(1L, announcementGiven);
+        Announcement actual = announcementService.update(1L, announcementGiven);
         Announcement expected = announcementGet;
         Assertions.assertEquals(expected, actual);
         Mockito.verify(announcementDao, Mockito.times(1)).findById(1L);
         Mockito.verify(announcementDao, Mockito.times(1)).save(announcementGiven);
     }
+
     @Test
     void updateAnnouncement_thenOException() {
 
         Mockito.when(announcementDao.findById(4L)).thenReturn(Optional.empty());
-        NoFoundEntityException noEntityException = Assertions.assertThrows( NoFoundEntityException.class,
-                ()->announcementService.update(4L, announcementGiven));
+        NoFoundEntityException noEntityException = Assertions.assertThrows(NoFoundEntityException.class,
+                () -> announcementService.update(4L, announcementGiven));
         Assertions.assertEquals(noEntityException.getMessage(),
                 "Такой записи для Announcement в базе данных не существует");
-        Mockito.verify(announcementDao,Mockito.times(1)).findById(4L);
+        Mockito.verify(announcementDao, Mockito.times(1)).findById(4L);
         Mockito.verify(announcementDao, Mockito.times(0)).save(Mockito.any());
     }
+
     @Test
     void readAllAnnouncements_thenOk() {
         Mockito.when(announcementDao.findAll()).thenReturn(announcementList);
         List<Announcement> actual = announcementService.readAll();
-        List<Announcement> expected =announcementList;
+        List<Announcement> expected = announcementList;
         Assertions.assertEquals(expected, actual);
         Mockito.verify(announcementDao, Mockito.times(1)).findAll();
     }
@@ -94,23 +100,25 @@ private  static Announcement announcementGiven = Announcement.builder()
     @Test
     void readOneAnnoucement_thenOk() {
         Mockito.when(announcementDao.findById(1L)).thenReturn(Optional.ofNullable(announcementGiven));
-      Announcement expected = announcementService.readOne(1L);
-       Announcement actual =announcementGiven;
-        Assertions.assertEquals(expected,actual);
+        Announcement expected = announcementService.readOne(1L);
+        Announcement actual = announcementGiven;
+        Assertions.assertEquals(expected, actual);
         Mockito.verify(announcementDao, Mockito.times(1)).findById(1L);
     }
+
     @Test
-    void readOneAnnoucement_thenException()  {
+    void readOneAnnoucement_thenException() {
         Mockito.when(announcementDao.findById(11L)).thenReturn(Optional.empty());
-        NoFoundEntityException runtimeException = Assertions.assertThrows(NoFoundEntityException.class,()->announcementService.readOne(11L));
+        NoFoundEntityException runtimeException = Assertions.assertThrows(NoFoundEntityException.class, () -> announcementService.readOne(11L));
         Assertions.assertEquals(runtimeException.getMessage(),
                 "Такой записи для Announcement в базе данных не существует");
         Mockito.verify(announcementDao, Mockito.times(1)).findById(11L);
 
     }
+
     @Test
     void deleteAnnoncementById_thenOk() {
-       announcementService.deleteById(1L);
+        announcementService.deleteById(1L);
         Mockito.verify(announcementDao, Mockito.times(1)).deleteById(1L);
     }
 }
