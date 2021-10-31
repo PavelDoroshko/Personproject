@@ -39,6 +39,8 @@ public class Announcement {
 
     @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+   // @JsonIgnore
+  //@OneToOne(cascade = CascadeType.ALL)
+  //@JoinColumn(name="bestAnnouncement_id")
     private BestAnnouncement bestAnnouncement;
 }

@@ -22,9 +22,12 @@ public class BestAnnouncement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne (orphanRemoval = true,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
-    @OnDelete(action = OnDeleteAction.CASCADE)
+   // @OneToOne (orphanRemoval = true,cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+    //@OnDelete(action = OnDeleteAction.CASCADE)
    // @JsonIgnore
+   @OneToOne(orphanRemoval = true,cascade = {CascadeType.ALL,CascadeType.REMOVE})
+   @OnDelete(action = OnDeleteAction.CASCADE)
+//   @OneToOne(mappedBy = "bestAnnouncement")
     private Announcement announcement;
 
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, fetch = FetchType.EAGER)

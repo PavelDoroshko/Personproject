@@ -27,11 +27,12 @@ public class BestAnnouncementService implements InterfaceBestAnnouncementService
     @Override
     @Transactional
     public BestAnnouncement create(BestAnnouncement bestAnnouncement) {
-        BestAnnouncement createbestAnnouncement = BestAnnouncement.builder()
+      /*  BestAnnouncement createbestAnnouncement = BestAnnouncement.builder()
                 .announcement(bestAnnouncement.getAnnouncement())
                 .user(bestAnnouncement.getUser())
-                .build();
-        return bestAnnouncementDao.save(createbestAnnouncement);
+                .build();*/
+       // return bestAnnouncementDao.save(createbestAnnouncement);
+        return bestAnnouncementDao.save(bestAnnouncement);
     }
 
     @Override

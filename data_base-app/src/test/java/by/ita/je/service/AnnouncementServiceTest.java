@@ -1,6 +1,7 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.AnnouncementDao;
+import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
 import by.ita.je.module.Announcement;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-class AnnouncementServiceTest {/*
+class AnnouncementServiceTest {
     @Mock
     private AnnouncementDao announcementDao;
     @InjectMocks
@@ -111,5 +112,5 @@ private  static Announcement announcementGiven = Announcement.builder()
     void deleteAnnoncementById_thenOk() {
        announcementService.deleteById(1L);
         Mockito.verify(announcementDao, Mockito.times(1)).deleteById(1L);
-    }*/
+    }
 }

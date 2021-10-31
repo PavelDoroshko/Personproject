@@ -34,7 +34,7 @@ public class AnnouncementService implements InterfaceAnnouncement {
 
     @Override
     @Transactional
-    public Announcement update(long id, AnnouncementDto announcement) throws NoFoundEntityException {
+    public Announcement update(long id, Announcement announcement) throws NoFoundEntityException {
         Announcement secondannouncement = announcementDao.findById(id).orElseThrow(() -> new NoFoundEntityException("Announcement"));
         secondannouncement.setGet_up(announcement.getGet_up());
         secondannouncement.setNumberPhone(announcement.getNumberPhone());

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InterfaceAnnouncement {
     Announcement create(Announcement announcement);
-    Announcement update(long id, AnnouncementDto announcement) throws NotFoundException;
+    Announcement update(long id, Announcement announcement) throws NotFoundException;
     List<Announcement> readAll();
     Announcement readOne(Long id) throws NotFoundException;
     void deleteById(Long id);

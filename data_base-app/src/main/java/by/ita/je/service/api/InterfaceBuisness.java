@@ -17,7 +17,7 @@ public interface InterfaceBuisness {
 
 
 
-    Announcement update(Long id, AnnouncementDto announcement) throws NotFoundException;
+    Announcement update(Long id, Announcement announcement) throws NotFoundException;
 
     List<Announcement> readAllAnnoucement (Long id) throws NotFoundException;
 
@@ -33,5 +33,5 @@ public interface InterfaceBuisness {
     @Transactional
     public Announcement getUpAnnoncementMoney(Long id,int money,Long userId);
 
-
+    User findUserByLoginPasword(String login,int pasword);
 }

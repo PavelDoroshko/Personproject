@@ -46,9 +46,11 @@ public class webController {
         return "findAll";
     }
     @GetMapping(value = "/findUser")
-    public String findById(@RequestParam(value = "login", required = false) String login, Model model){
-        ResponseEntity responseEntity = restTemplate.getForEntity(baseUrl + "user/"+"read?login="+ login, UserDto.class);
-        model.addAttribute("userdLogin", responseEntity.getBody());
+    public String findById(@RequestParam(value = "login", required = false) String login,@RequestParam(value = "pasword", required = false) int pasword, Model model){
+      //  ResponseEntity responseEntity = restTemplate.getForEntity(baseUrl + "user/"+"read?login="+ login, UserDto.class);
+       User user =interfaceBuisness.findUserByLoginPasword(login,pasword);
+
+        model.addAttribute("userdLogin", user);
         return "findById";
     }
 
@@ -76,14 +78,14 @@ public class webController {
     }
     @GetMapping(value = "/{userId}/update")
     public String update(@PathVariable("userId") long userId, Model model){
-        model.addAttribute("announcementd",  new AnnouncementDto());
+        model.addAttribute("announcementd",  new Announcement());
         model.addAttribute("userId", userId);
         return "formUpdate";
     }
     @SneakyThrows
     @PostMapping(value = "/{userId}/updatedAnnouncement")
-    public String updatedAnnouncement(@PathVariable("userId") long userId, @ModelAttribute AnnouncementDto announcementDto, Model model){
-        Announcement response =interfaceAnnouncement.update(announcementDto.getId(),announcementDto);
+    public String updatedAnnouncement(@PathVariable("userId") long userId, @ModelAttribute Announcement announcement, Model model){
+        Announcement response =interfaceAnnouncement.update(announcement.getId(),announcement);
             //    =restTemplate.postForObject(baseUrl + "buisness"+"/update/" + announcementDto.getId(), announcementDto,  AnnouncementDto.class);
         model.addAttribute("announcementd", response);
         model.addAttribute("userId", userId);

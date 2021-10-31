@@ -32,17 +32,17 @@ public class UserService implements InterfaseUserService {
         if ((user.getLogin() == ""))
             throw new IncorrectDataException("User");
         user.setBalance(0);
-               if( user.getPasword()==0)
-           throw new IncorrectDataException("User");
+        if (user.getPasword() == 0)
+            throw new IncorrectDataException("User");
 
         return userDao.save(user);
     }
 
     @Override
-    public User readOne(Long id) throws NotFoundException,IncorrectDataException {
+    public User readOne(Long id) throws NotFoundException, IncorrectDataException {
         if (id < 1) throw new IncorrectDataException("User");
-         final User user =userDao.findById(id).orElseThrow(() -> new NoFoundEntityException("User"));
-   return user;
+        final User user = userDao.findById(id).orElseThrow(() -> new NoFoundEntityException("User"));
+        return user;
     }
 
     @Override
@@ -55,6 +55,7 @@ public class UserService implements InterfaseUserService {
         }
 
     }
+
     @Override
     public List<User> readAll() {
         final Spliterator<User> result = userDao.findAll().spliterator();
@@ -62,14 +63,15 @@ public class UserService implements InterfaseUserService {
                 .stream(result, false)
                 .collect(Collectors.toList());
     }
+
     @Override
     @Transactional
     public User readOneByLogin(String login) throws NoFoundEntityException {
-
-        final User user =userDao.findByLogin(login);
+        final User user = userDao.findByLogin(login);
         if (Objects.isNull(user)) {
             throw new NoFoundEntityException("User");
         }
+
         return user;
     }
 }
