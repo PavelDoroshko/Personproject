@@ -21,8 +21,8 @@ CREATE TABLE announcement (
                        user_user_id   long,
                        user_id long,
                        coment_id long,
-                       car_id long,
                        coment_coment_id long,
+                       car_id long,
                        best_announcement_id  long,
                        PRIMARY KEY (id),
                        FOREIGN KEY (user_id) REFERENCES user(user_id)
