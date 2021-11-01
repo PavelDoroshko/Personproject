@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        body {
+            background-color: #0022CCBB;
+        }
+    </style>
 </head>
 <body>
-<p>Подбери авто здесь</a></p>
+<p>ПОДБЕРИ АВТО ЗДЕСЬ</a></p>
 
 <p>
 <form method="get" action="/data_base-app/create">
@@ -31,9 +36,6 @@
 
 <p>
 
-
-
-
 <table border="1" width="60%" cellpadding="5">
     <tr>
         <td>
@@ -41,8 +43,18 @@
             <form id="field2" method="get">
                 <label for="nameCar">марка авто: </label>
                 <input type="text" id="nameCar" name="nameCar"  pattern="^[a-zA-Z]+$"/>
+                <p>
                 <label for="modelCar">модель авто: </label>
                 <input type="text" id="modelCar"  name="modelCar"  pattern="^[a-zA-Z]+$"/>
+                <p>
+                <label for="modelCar">тип двигателя: </label>
+                <input type="text" id="typeEngine"  name="typeEngine"  pattern="^[a-zA-Z]+$"/>
+                <p>
+                <label for="modelCar">расположение: </label>
+                <input type="text" id="location"  name="location"  pattern="^[a-zA-Z]+$"/>
+                <p>
+                <label for="modelCar">год выпуска: </label>
+                <input type="text" id="yearOfIssue"  name="yearOfIssue"  pattern="(^[0-9]{0,7})+$"/>
             </form>
             <br>
             <p>

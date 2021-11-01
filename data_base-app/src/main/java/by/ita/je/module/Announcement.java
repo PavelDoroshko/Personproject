@@ -29,6 +29,7 @@ public class Announcement {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Coment coment;
 

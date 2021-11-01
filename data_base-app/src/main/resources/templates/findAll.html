@@ -18,14 +18,7 @@
 <p>
 <div th:if="${not #lists.isEmpty(announcements)}">
     <div th:each="announcement : ${announcements}">
-        <form id="findById" method="get">
-            <input name="id" type="text" th:value= "${announcement.id}" id="id" hidden="true"/>
-            <button type="submit" form="findById" formaction="/data_base-app/update" >Редактировать</button>
-            <p>
-            <button type="submit" form="findById" formaction="/web-app/delete" >Удалить</button>
-            <p>
-            <button type="submit" form="findById" formaction="/web-app/comente" >Комментировать</button>
-            <p>
+
         </form>
         <p th:text="'ID: ' + ${announcement.id}"></p>
         <p th:text="'статус: ' + ${announcement.get_up}"></p>

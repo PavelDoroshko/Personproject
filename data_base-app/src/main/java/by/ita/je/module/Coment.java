@@ -21,6 +21,6 @@ public class Coment {
     private long id;
     private String message;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Announcement announcement;
 }

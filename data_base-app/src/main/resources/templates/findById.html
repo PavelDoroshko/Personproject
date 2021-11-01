@@ -11,65 +11,52 @@
 </head>
 <body>
 
-
 <form id="findById" method="get">
   <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
 </form>
-
-<button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все</button>
+<button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все объявления</button>
 <p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/createAnnouncement}">
   <button type="submit">создать новое обьявление</button>
 </form>
 <p>
+<p>
 <form method="post" th:action="@{/__${userdLogin.user_id}__/createCreditCart}">
   <button type="submit">электронный кошелек</button>
 </form>
+<p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/addBalance}">
   <button type="submit">пополнить баланс</button>
 </form>
-
+<p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/findAnnouncementById}">
   <button type="submit">найти объявление</button>
 </form>
+<p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/getUpAnnouncement}">
   <button type="submit">поднять объявление</button>
 </form>
+<p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/update}">
-  <button type="submit">редактировать</button>
+  <button type="submit">редактировать объявление</button>
 </form>
+<p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/deleteAnnouncement}">
   <button type="submit">удалить объявление</button>
 </form>
-</form>
+ <p>
 <form method="get" th:action="@{/__${userdLogin.user_id}__/createBestAnnouncement}">
   <button type="submit">сделать закладку</button>
 </form>
-
+<p>
 <form action="/data_base-app/findAllBestAnnouncement" method="get">
-  <button type="submit">Показать весь список закладок</button>
+  <button type="submit">показать весь список закладок</button>
 </form>
-  <tr>
-  <td>
-    <h2>Найти авто по фильтру:</h2>
-    <form id="field2" method="get">
-      <label for="id">ид: </label>
-      <input type="text" id="id" name="id"  pattern="(^[0-9]{0,7})+$"/>
-
-    </form>
-    <br>
-    <p>
-    <form id="findById" method="get">
-      <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
-    </form>
-      <button type="submit" form="field2" formaction="/data_base-app/findAnnouncementById"  >Найти обьявление</button>
-    </p>
-  </td>
-</tr>
+<p>
+<form method="get" action="/data_base-app//">
+  <button type="submit">На главную страницу</button>
+</form>
 </table>
-
-
-
 <p>
 <h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
 <table border="1" width="45%" cellpadding="5">

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Form Create Person</title>
+    <title>Form For Delete Announcement</title>
     <style>
         body {
             background-color: #0022CCFF;
@@ -10,11 +10,11 @@
     </style>
 </head>
 <body>
-<h1>поиск объявления</h1>
+<h1>удалить объявления</h1>
 <form action="#" th:action="@{/__${userId}__/deleteAllAnnouncement}" th:object="${announcement}" method="get">
     id: <input type="text" th:field="${announcementd.id}" pattern="(^[0-9]{0,7})+$" required/>
 
-    <p><input type="submit" value="Найти" /> <input type="reset" value="Отменить" /></p>
+    <p><input type="submit" value="Удалить" /> <input type="reset" value="Отменить" /></p>
 </form>
 <br>
 
