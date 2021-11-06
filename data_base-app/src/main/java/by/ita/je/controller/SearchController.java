@@ -2,7 +2,7 @@ package by.ita.je.controller;
 
 import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.dto.SearchDto;
-import by.ita.je.service.SearchService;
+import by.ita.je.service.api.SearchService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

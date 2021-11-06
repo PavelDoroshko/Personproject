@@ -2,8 +2,8 @@ package by.ita.je.service;
 
 import by.ita.je.dao.ComentDao;
 import by.ita.je.exception.NoFoundEntityException;
-import by.ita.je.module.Car;
-import by.ita.je.module.Coment;
+import by.ita.je.entity.Coment;
+import by.ita.je.service.api.ComentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

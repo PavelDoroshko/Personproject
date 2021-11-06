@@ -1,12 +1,10 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.AnnouncementDao;
-import by.ita.je.dto.AnnouncementDto;
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
-import by.ita.je.module.Announcement;
-import by.ita.je.module.Car;
-import by.ita.je.module.User;
+import by.ita.je.entity.Announcement;
+import by.ita.je.service.api.AnnouncementService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

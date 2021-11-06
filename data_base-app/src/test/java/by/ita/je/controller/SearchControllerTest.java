@@ -3,8 +3,8 @@ package by.ita.je.controller;
 import by.ita.je.dao.AnnouncementDao;
 import by.ita.je.dao.SearchDao;
 import by.ita.je.dto.SearchDto;
-import by.ita.je.module.Announcement;
-import by.ita.je.module.Car;
+import by.ita.je.entity.Announcement;
+import by.ita.je.entity.Car;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -14,7 +14,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;

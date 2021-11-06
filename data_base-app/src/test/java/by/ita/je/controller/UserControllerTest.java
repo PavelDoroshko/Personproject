@@ -1,7 +1,8 @@
 package by.ita.je.controller;
 
 import by.ita.je.dao.UserDao;
-import by.ita.je.module.User;
+import by.ita.je.dto.UserDto;
+import by.ita.je.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
@@ -11,20 +12,23 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+class UserControllerTest {/*
 
 
     @Autowired
@@ -67,19 +71,24 @@ class UserControllerTest {
                 .pasword(123)
                 .build();
         User user2 =  User.builder()
-                .login("pavel")
-                .pasword(123)
+                .login("pave")
+                .pasword(13)
                 .build();
         userDao.save(user1);
         userDao.save(user2);
-
+List<User> users = userDao.findAll();
+List <UserDto> list =users.stream()
+                .map(user->objectMapper.convertValue(user, UserDto.class))
+                        .collect(Collectors.toList());
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/user/read/all")
+                (get("/user/read/all"))
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.content().json((objectMapper.writeValueAsString(Arrays.asList(user1,user2)))));
+                .andExpect(content().json((objectMapper.writeValueAsString(list))));
 
 
     }
+
+*/
 }

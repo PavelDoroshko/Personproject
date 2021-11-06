@@ -9,7 +9,6 @@ CREATE TABLE user (
                                        login varchar(40),
                                         balance INT,
                                         pasword INT,
-                                        announcement_id long,
                                         best_announcement_id  long,
                                         credit_cart_id long,
                                         PRIMARY KEY (user_id)
@@ -72,8 +71,8 @@ CREATE TABLE credit_cart (
 
 
 
-    INSERT INTO user(  login,balance ,pasword ,announcement_id, best_announcement_id )
-                                values ('pavel', 1, 22, 1,1);
+    INSERT INTO user(  login,balance ,pasword , best_announcement_id )
+                                values ('pavel', 1, 22, 1);
     INSERT INTO announcement(  get_up , number_phone ,user_id,  car_id, coment_id,coment_coment_id ,best_announcement_id  )
                                  values (2, 22, 1,1,1,1,1);
     INSERT INTO car ( name_car , model_car , price, year_of_issue , milage,volume_engine,

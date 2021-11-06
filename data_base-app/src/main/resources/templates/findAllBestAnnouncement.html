@@ -20,6 +20,18 @@
   <div th:each="bestannouncement : ${bestannouncements}">
 
     <p th:text="'объявление с ID: ' + ${bestannouncement.announcement.id}"></p>
+    <p th:text="'объявление с авто: ' + ${bestannouncement.announcement.car.nameCar}"></p>
+    <p th:text="'модель авто: ' + ${bestannouncement.announcement.car.modelCar}"></p>
+    <p th:text="'цена авто: ' + ${bestannouncement.announcement.car.price}"></p>
+    <p th:text="'гол выпуска авто: ' + ${bestannouncement.announcement.car.yearOfIssue}"></p>
+    <p th:text="'пробег авто: ' + ${bestannouncement.announcement.car.milage}"></p>
+    <p th:text="'объем двигателя авто: ' + ${bestannouncement.announcement.car.volumeEngine}"></p>
+    <p th:text="'тип двигателя авто: ' + ${bestannouncement.announcement.car.typeEngine}"></p>
+    <p th:text="'коробка авто: ' + ${bestannouncement.announcement.car.transmission}"></p>
+    <p th:text="'расположение авто: ' + ${bestannouncement.announcement.car.location}"></p>
+    <p th:text="'обмен авто: ' + ${bestannouncement.announcement.car.exchange}"></p>
+    <p th:text="'комментарий к авто: ' + ${bestannouncement.announcement.coment.message}"></p>
+
 
 
     <hr>

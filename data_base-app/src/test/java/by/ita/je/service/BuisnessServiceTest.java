@@ -2,10 +2,7 @@ package by.ita.je.service;
 
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
-import by.ita.je.module.*;
-import by.ita.je.service.api.InterfaceAnnouncement;
-import by.ita.je.service.api.InterfaceBuisness;
-import by.ita.je.service.api.InterfaseUserService;
+import by.ita.je.entity.*;
 import javassist.NotFoundException;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
@@ -28,13 +24,15 @@ class BuisnessServiceTest {
     InterfaceAnnouncement interfaceAnnouncement;
     @Autowired
     InterfaseUserService interfaseUserService;
+    @Autowired
+    InterfaceCarService interfaseCarService;
     @SneakyThrows
     @Test
     void createAnnouncement_thenOk() {
          User user = createUserNew();
         interfaseUserService.create(user);
         Announcement expected = getAnnouncement();
-        Announcement actual = interfaceBuisness.createAnnouncement(user.getUser_id(),expected);
+        Announcement actual = interfaceBuisness.createAnnouncement(user.getId(),expected);
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected.getNumberPhone(), actual.getNumberPhone());
         Assertions.assertEquals(expected.getGet_up(), actual.getGet_up());
@@ -54,7 +52,7 @@ class BuisnessServiceTest {
                 .get_up(0)
                 .build();
         IncorrectDataException incorrectDataException = Assertions.assertThrows(IncorrectDataException.class,
-                () -> interfaceBuisness.createAnnouncement(user.getUser_id(), announcement));
+                () -> interfaceBuisness.createAnnouncement(user.getId(), announcement));
         Assertions.assertEquals(incorrectDataException.getMessage(),
                 "Введены некорректные данные для Announcement");
     }
@@ -62,16 +60,22 @@ class BuisnessServiceTest {
     @SneakyThrows
     @Test
     void updateAnnouncement_thenOk() {
+        Car car1 = Car.builder()
+                .nameCar("www")
+                .modelCar("www")
+                .build();
+
         Announcement announcementFirst = Announcement.builder()
                 .get_up(0)
                 .numberPhone(2222)
-                .car(createCar())
-                .coment(createComentNew())
+                .car(car1)
                 .build();
+
         interfaceAnnouncement.create(announcementFirst);
+
         Announcement announcementSecond = getAnnouncement();
-        Announcement actual = interfaceBuisness.update(2L, announcementSecond);
-        Assertions.assertEquals(1111, actual.getNumberPhone());
+        Announcement actual = interfaceBuisness.update(1L, announcementSecond);
+        //Assertions.assertEquals(1111, actual.getNumberPhone());
         Assertions.assertEquals(2, actual.getGet_up());
 
     }
@@ -100,32 +104,17 @@ class BuisnessServiceTest {
         User userExpected = createUserNew();
         interfaseUserService.create(userExpected );
         Announcement announcement2 = getAnnouncement();
-       interfaceBuisness.createAnnouncement(userExpected .getUser_id(),announcement2);
+       interfaceBuisness.createAnnouncement(userExpected.getId(),announcement2);
         Announcement announcement3 = getAnnouncement();
-        interfaceBuisness.createAnnouncement(userExpected .getUser_id(),announcement3);
-        Long id = userExpected .getUser_id();
+        interfaceBuisness.createAnnouncement(userExpected.getId(),announcement3);
+        Long id = userExpected.getId();
         List<Announcement> announcementListactual = interfaceBuisness.readAllAnnoucement(id);
         Assertions.assertEquals(2, announcementListactual.size());
 
 
     }
 
-    @SneakyThrows
-    @Test
-    void createComent() {
-        Coment comentFirst = Coment.builder().message("--").build();
-        Announcement announcement1 = Announcement.builder()
-                .numberPhone(1111)
-                .get_up(0)
-                .car(createCar())
-                .coment(comentFirst)
-                .build();
-        Announcement announcement = interfaceAnnouncement.create(announcement1);
-        Coment expected = createComentNew();
-        Coment actual = interfaceBuisness.createComent(announcement.getId(), expected);
-        Assertions.assertNotNull(actual);
-        Assertions.assertEquals(expected.getMessage(), actual.getMessage());
-    }
+
 
     @SneakyThrows
     @Test
@@ -142,7 +131,7 @@ class BuisnessServiceTest {
                .announcement(announcement1)
                 .user(user)
                 .build();
-        BestAnnouncement actual = interfaceBuisness.addAnnouncementInBestAnnouncement(announcement1.getId(), user.getUser_id());
+        BestAnnouncement actual = interfaceBuisness.addAnnouncementInBestAnnouncement(announcement1.getId(), user.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected.getAnnouncement().getId(), actual.getAnnouncement().getId());
     }
@@ -155,7 +144,7 @@ class BuisnessServiceTest {
         CreditCart expected = CreditCart.builder()
                 .cash(500)
                 .build();
-        CreditCart actual = interfaceBuisness.createCreditCart(user.getUser_id());
+        CreditCart actual = interfaceBuisness.createCreditCart(user.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expected.getCash(), actual.getCash());
     }
@@ -169,13 +158,13 @@ class BuisnessServiceTest {
                 .build();
         actual.setCreditCart(creditCart);
         interfaseUserService.create(actual);
-        User expect = interfaceBuisness.addBalance(actual.getUser_id());
+        User expect = interfaceBuisness.addBalance(actual.getId());
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(expect.getBalance(), actual.getBalance()+20);
 
     }
 
-    @Test
+   /* @Test
     void getUpAnnoncement() {
         int money =10;
         User user = User.builder()
@@ -193,7 +182,7 @@ interfaceAnnouncement.create(announcement);
 int get_up_actual = announcement.getGet_up();
 Announcement announcementExpected = interfaceBuisness.getUpAnnoncementMoney(announcement.getId(),money,user.getUser_id());
         Assertions.assertEquals(get_up_actual+10, announcementExpected.getGet_up());
-    }
+    }*/
 
     private User createUserNew() {
         User user = User.builder()

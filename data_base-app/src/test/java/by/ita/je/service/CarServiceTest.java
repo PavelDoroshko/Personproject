@@ -1,10 +1,10 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.CarDao;
-import by.ita.je.dao.UserDao;
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
-import by.ita.je.module.Car;
+import by.ita.je.entity.Car;
+import by.ita.je.service.api.CarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,14 +103,7 @@ class CarServiceTest {
 
     }
 
-    @Test
-    void whenReadAll_returnCars() {
-        Mockito.when(carDao.findAll()).thenReturn(cars);
-        List<Car> actual = carService.readAll();
-        List<Car> expected = cars;
-        Assertions.assertEquals(expected, actual);
-        Mockito.verify(carDao, Mockito.times(1)).findAll();
-    }
+
 
 
 }

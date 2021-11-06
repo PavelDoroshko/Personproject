@@ -18,14 +18,13 @@ CREATE TABLE announcement (
                        id long NOT NULL AUTO_INCREMENT,
                        get_up INT,
                        number_phone INT,
-                       user_user_id   long,
+                       user_user_id long,
                        user_id long,
                        coment_id long,
-                       coment_coment_id long,
                        car_id long,
                        best_announcement_id  long,
                        PRIMARY KEY (id),
-                       FOREIGN KEY (user_id) REFERENCES user(user_id)
+                       FOREIGN KEY (user_user_id) REFERENCES user(user_id)
 );
 
 CREATE TABLE car (
@@ -41,9 +40,8 @@ CREATE TABLE car (
                     location varchar,
                     custom varchar,
                     exchange varchar,
-                    announcement_id long,
-                    PRIMARY KEY (id),
-                    FOREIGN KEY (announcement_id ) REFERENCES announcement(id )
+                    PRIMARY KEY (id)
+
 );
 
 
@@ -51,17 +49,14 @@ CREATE TABLE car (
 CREATE TABLE coment (
                                 coment_id  long NOT NULL AUTO_INCREMENT,
                                 message varchar,
-                                announcement_id long,
-                                PRIMARY KEY ( coment_id),
-                                FOREIGN KEY (announcement_id ) REFERENCES  announcement(id )
+                                PRIMARY KEY ( coment_id)
+
 );
 CREATE TABLE credit_cart (
                                 id  long NOT NULL AUTO_INCREMENT,
                                  cash int,
-                                 user_user_id long,
-                                user_id long,
-                                PRIMARY KEY (id),
-                                FOREIGN KEY (user_user_id) REFERENCES  user(user_id )
+                                PRIMARY KEY (id)
+
 
 );
  CREATE TABLE best_announcement (

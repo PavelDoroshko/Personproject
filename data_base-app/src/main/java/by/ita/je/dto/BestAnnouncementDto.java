@@ -1,6 +1,5 @@
 package by.ita.je.dto;
 
-import by.ita.je.module.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

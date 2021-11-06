@@ -1,8 +1,8 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.CreditCartDao;
-import by.ita.je.module.Coment;
-import by.ita.je.module.CreditCart;
+import by.ita.je.entity.CreditCart;
+import by.ita.je.service.api.CreditCartService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

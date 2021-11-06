@@ -3,17 +3,16 @@ package by.ita.je.service;
 import by.ita.je.dao.UserDao;
 import by.ita.je.exception.IncorrectDataException;
 import by.ita.je.exception.NoFoundEntityException;
-import by.ita.je.module.User;
+import by.ita.je.entity.User;
+import by.ita.je.service.api.UserService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,20 +79,6 @@ class UserServiceTest {
         Mockito.verify(userDao, Mockito.times(1)).findById(11L);
 
     }
-    @SneakyThrows
-    @Test
-    void deleteById_thenOk() {
-        userService.deleteById(1L);
-        Mockito.verify(userDao, Mockito.times(1)).deleteById(1L);
-    }
 
-    @Test
-    void deleteById_thenThrowException() {
-        doThrow(new NoFoundEntityException("User")).when(userDao).deleteById(4L);
-        NoFoundEntityException noFoundEntityException = Assertions.assertThrows(NoFoundEntityException.class,
-                ()->userService.deleteById(4L));
-        Assertions.assertEquals(noFoundEntityException.getMessage(),
-                "Такой записи для User в базе данных не существует");
 
-    }
 }

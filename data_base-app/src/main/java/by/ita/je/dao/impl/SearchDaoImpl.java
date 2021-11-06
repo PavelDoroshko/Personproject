@@ -1,10 +1,10 @@
 package by.ita.je.dao.impl;
 
 import by.ita.je.dao.SearchDao;
-import by.ita.je.module.Announcement;
-import by.ita.je.module.Announcement_;
-import by.ita.je.module.Car;
-import by.ita.je.module.Car_;
+import by.ita.je.entity.Announcement;
+import by.ita.je.entity.Announcement_;
+import by.ita.je.entity.Car;
+import by.ita.je.entity.Car_;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -48,21 +48,26 @@ public class SearchDaoImpl implements SearchDao {
         List<Announcement> announcementList1 = new ArrayList<>();
         List<Announcement> announcementList2 = new ArrayList<>();
         List<Announcement> announcementList3 = new ArrayList<>();
-
-        for (Announcement announcement : announcementList) {
-            if (announcement.getCar().getNameCar().equals(nameCar)) {
-                announcementList1.add(announcement);
-            }
+if(nameCar!="") {
+    for (Announcement announcement : announcementList) {
+        if (announcement.getCar().getNameCar().equals(nameCar)) {
+            announcementList1.add(announcement);
         }
-        for (Announcement announcement : announcementList1) {
-            if (announcement.getCar().getModelCar().equals(modelCar)) {
-                announcementList2.add(announcement);
-                return announcementList2;
-            } else {
-                return announcementList1;
+    }
+    if (modelCar =="") {
+        return announcementList1;
+    }
+    if (modelCar != "") {
+        for (Announcement announcement1 : announcementList1) {
+            if (announcement1.getCar().getModelCar().equals(modelCar)) {
+                announcementList2.add(announcement1);
+                //return announcementList2;
             }
+          //  return announcementList2;
         }
-
+        return announcementList2;
+    }
+}
       return announcementList;
     }
 }

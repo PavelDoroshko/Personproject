@@ -12,40 +12,40 @@
 <body>
 
 <form id="findById" method="get">
-  <input name="id" type="text" th:value= "${userdLogin.user_id}" id="id" hidden="true"/>
+  <input name="id" type="text" th:value= "${userdLogin.id}" id="id" hidden="true"/>
 </form>
 <button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все объявления</button>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/createAnnouncement}">
+<form method="get" th:action="@{/__${userdLogin.id}__/createAnnouncement}">
   <button type="submit">создать новое обьявление</button>
 </form>
 <p>
 <p>
-<form method="post" th:action="@{/__${userdLogin.user_id}__/createCreditCart}">
+<form method="post" th:action="@{/__${userdLogin.id}__/createCreditCart}">
   <button type="submit">электронный кошелек</button>
 </form>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/addBalance}">
+<form method="get" th:action="@{/__${userdLogin.id}__/addBalance}">
   <button type="submit">пополнить баланс</button>
 </form>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/findAnnouncementById}">
+<form method="get" th:action="@{/__${userdLogin.id}__/findAnnouncementById}">
   <button type="submit">найти объявление</button>
 </form>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/getUpAnnouncement}">
+<form method="get" th:action="@{/__${userdLogin.id}__/getUpAnnouncement}">
   <button type="submit">поднять объявление</button>
 </form>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/update}">
+<form method="get" th:action="@{/__${userdLogin.id}__/update}">
   <button type="submit">редактировать объявление</button>
 </form>
 <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/deleteAnnouncement}">
+<form method="get" th:action="@{/__${userdLogin.id}__/deleteAnnouncement}">
   <button type="submit">удалить объявление</button>
 </form>
  <p>
-<form method="get" th:action="@{/__${userdLogin.user_id}__/createBestAnnouncement}">
+<form method="get" th:action="@{/__${userdLogin.id}__/createBestAnnouncement}">
   <button type="submit">сделать закладку</button>
 </form>
 <p>

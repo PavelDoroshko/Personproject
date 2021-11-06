@@ -1,8 +1,8 @@
 package by.ita.je.service;
 
 import by.ita.je.dao.BestAnnouncementDao;
-import by.ita.je.module.BestAnnouncement;
-import by.ita.je.module.Coment;
+import by.ita.je.entity.BestAnnouncement;
+import by.ita.je.service.api.BestAnnouncementService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

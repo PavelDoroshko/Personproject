@@ -1,0 +1,11 @@
+by\ita\je\controller\SearchControllerTest.class
+by\ita\je\controller\UserControllerTest.class
+by\ita\je\service\BestAnnouncementServiceTest.class
+by\ita\je\dao\impl\SearchDaoImplTest.class
+by\ita\je\service\ComentServiceTest.class
+by\ita\je\service\AnnouncementServiceTest.class
+by\ita\je\service\CarServiceTest.class
+by\ita\je\service\CreditCartServiceTest.class
+by\ita\je\service\UserServiceTest.class
+by\ita\je\service\BuisnessServiceTest.class
+by\ita\je\controller\BuisnessControllerTest.class

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class ComentDto {
     private long id;
     private String message;
-    private AnnouncementDto announcement;
+
 
 }
