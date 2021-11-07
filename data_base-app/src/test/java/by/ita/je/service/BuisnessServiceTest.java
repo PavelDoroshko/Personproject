@@ -64,18 +64,21 @@ class BuisnessServiceTest {
                 .nameCar("www")
                 .modelCar("www")
                 .build();
-
+         Coment coment1 = Coment.builder()
+                 .message("ok")
+                 .build();
         Announcement announcementFirst = Announcement.builder()
                 .get_up(0)
                 .numberPhone(2222)
                 .car(car1)
+                .coment(coment1)
                 .build();
 
         interfaceAnnouncement.create(announcementFirst);
 
         Announcement announcementSecond = getAnnouncement();
-        Announcement actual = interfaceBuisness.update(1L, announcementSecond);
-        //Assertions.assertEquals(1111, actual.getNumberPhone());
+        Announcement actual = interfaceBuisness.update(2L, announcementSecond);
+        Assertions.assertEquals(1111, actual.getNumberPhone());
         Assertions.assertEquals(2, actual.getGet_up());
 
     }

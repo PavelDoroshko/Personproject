@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {/*
+class UserControllerTest {
 
 
     @Autowired
@@ -58,7 +58,7 @@ class UserControllerTest {/*
                         .contentType(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().is2xxSuccessful())
-               .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").isNumber())
+               .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.login").value("pavel"));
 
     }
@@ -90,5 +90,4 @@ List <UserDto> list =users.stream()
 
     }
 
-*/
 }

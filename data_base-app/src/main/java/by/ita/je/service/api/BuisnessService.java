@@ -47,6 +47,8 @@ public class BuisnessService implements InterfaceBuisness {
         Coment coment = comentService.update(announcementUpdate.getComent().getId(), announcement.getComent());
         announcementUpdate.setCar(carUpdate);
         announcementUpdate.setComent(coment);
+        announcementUpdate.setGet_up(announcement.getGet_up());
+        announcementUpdate.setNumberPhone(announcement.getNumberPhone());
         return announcementService.update(id,announcementUpdate);
     }
 

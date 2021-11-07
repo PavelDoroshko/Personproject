@@ -29,7 +29,7 @@ public class User {
     @JoinColumn(name = "user_id")
     private List<Announcement> announcementList ;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<BestAnnouncement> bestAnnouncements;
 
     @OneToOne(cascade = CascadeType.ALL)

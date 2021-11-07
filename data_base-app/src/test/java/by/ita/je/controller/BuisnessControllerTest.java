@@ -1,11 +1,9 @@
 package by.ita.je.controller;
 
 import by.ita.je.dao.AnnouncementDao;
+import by.ita.je.dao.BestAnnouncementDao;
 import by.ita.je.dao.UserDao;
-import by.ita.je.entity.Announcement;
-import by.ita.je.entity.Car;
-import by.ita.je.entity.Coment;
-import by.ita.je.entity.User;
+import by.ita.je.entity.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -23,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class BuisnessControllerTest {/*
+class BuisnessControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -32,6 +30,8 @@ class BuisnessControllerTest {/*
     @Autowired
     private UserDao userDao;
     @Autowired
+   private BestAnnouncementDao bestAnnouncementDao;
+    @Autowired
     private MockMvc mockMvc;
 
     @AfterEach
@@ -39,23 +39,33 @@ class BuisnessControllerTest {/*
         announcementDao.deleteAll();
         userDao.deleteAll();
     }
+
     @SneakyThrows
     @Test
     void createAnnouncement() {
+        User user = User.builder()
+                .login("eee")
+                .pasword(222)
+                .build();
+        userDao.save(user);
         Car car = Car.builder()
                 .nameCar("www")
                 .modelCar("eee")
                 .build();
-      Announcement announcement  =  Announcement.builder()
-              .get_up(1)
+        Coment coment = Coment.builder()
+                .message("ok")
+                .build();
+        Announcement announcement = Announcement.builder()
+                .get_up(1)
                 .numberPhone(121)
-              .car(car)
+                .car(car)
+                .coment(coment)
                 .build();
         mockMvc.perform(
-                post("/buisness/create")
-                        .content(objectMapper.writeValueAsString(announcement))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
+                        post("/buisness/create?id=1")
+                                .content(objectMapper.writeValueAsString(announcement))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.numberPhone").value("121"));
@@ -70,18 +80,29 @@ class BuisnessControllerTest {/*
     @SneakyThrows
     @Test
     void deleteById() {
+        User user = User.builder()
+                .login("eee")
+                .pasword(222)
+                .build();
+        userDao.save(user);
         Car car = Car.builder()
                 .nameCar("www")
                 .modelCar("eee")
                 .build();
-        Announcement announcement  =  Announcement.builder()
+        Coment coment = Coment.builder()
+                .message("ok")
+                .build();
+        Announcement announcement = Announcement.builder()
+                .id(1)
                 .get_up(1)
+                .user(user)
                 .numberPhone(121)
                 .car(car)
+                .coment(coment)
                 .build();
-        announcementDao.save(announcement );
+        announcementDao.save(announcement);
         mockMvc.perform(
-                delete("/buisness/delete?id="+"1"))
+                        delete("/buisness/delete?id=5" ))
                 .andExpect(status().isOk());
 
     }
@@ -96,25 +117,25 @@ class BuisnessControllerTest {/*
         Coment coment = Coment.builder()
                 .message("aaa")
                 .build();
-        Announcement announcement  =  Announcement.builder()
+        Announcement announcement = Announcement.builder()
                 .get_up(1)
                 .numberPhone(121)
                 .car(car)
                 .coment(coment)
                 .build();
-        announcementDao.save(announcement );
+        announcementDao.save(announcement);
 
-        Announcement announcementUpdate  =  Announcement.builder()
+        Announcement announcementUpdate = Announcement.builder()
                 .get_up(1)
                 .numberPhone(444)
                 .car(car)
                 .coment(coment)
                 .build();
         mockMvc.perform(
-                put("/buisness/update?id="+1L)
-                        .content(objectMapper.writeValueAsString(announcementUpdate))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
+                        put("/buisness/updateAnnouncement?id=2" )
+                                .content(objectMapper.writeValueAsString(announcementUpdate))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.numberPhone").value("444"));
@@ -123,7 +144,7 @@ class BuisnessControllerTest {/*
     @SneakyThrows
     @Test
     void readAll() {
-        User user1 =  User.builder()
+        User user1 = User.builder()
                 .login("pavel")
                 .pasword(123)
                 .build();
@@ -135,62 +156,32 @@ class BuisnessControllerTest {/*
         Coment coment = Coment.builder()
                 .message("aaa")
                 .build();
-        Announcement announcement  =  Announcement.builder()
+        Announcement announcement = Announcement.builder()
                 .user(user1)
                 .get_up(1)
                 .numberPhone(121)
                 .car(car)
                 .coment(coment)
                 .build();
-        announcementDao.save(announcement );
+        announcementDao.save(announcement);
         mockMvc.perform(
-               get("/buisness/readall/"+"1")
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
+                        get("/buisness/readall/3" )
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().is2xxSuccessful());
 
     }
 
-    @SneakyThrows
-    @Test
-    void coment() {
 
-        Coment coment = Coment.builder()
-                .message("aaa")
-                .build();
-        Coment coment1 = Coment.builder()
-                .message("")
-                .build();
-        Car car = Car.builder()
-                .nameCar("www")
-                .modelCar("eee")
-                .build();
-
-        Announcement announcement  =  Announcement.builder()
-                .get_up(1)
-                .numberPhone(121)
-                .car(car)
-                .coment(coment1)
-                .build();
-        announcementDao.save(announcement );
-        mockMvc.perform(
-                post("/buisness/update/coment?id="+"1")
-                        .content(objectMapper.writeValueAsString(coment))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("aaa"));
-    }
 
     @SneakyThrows
     @Test
     void addZakladka() {
-        User user =  User.builder()
+        User user1 = User.builder()
                 .login("pavel")
                 .pasword(123)
                 .build();
-        userDao.save(user);
+        userDao.save(user1);
         Car car = Car.builder()
                 .nameCar("www")
                 .modelCar("eee")
@@ -198,27 +189,30 @@ class BuisnessControllerTest {/*
         Coment coment = Coment.builder()
                 .message("aaa")
                 .build();
-        Announcement announcement  =  Announcement.builder()
-                .id(1)
-                .user(user)
+        Announcement announcement1 = Announcement.builder()
+                .user(user1)
                 .get_up(1)
                 .numberPhone(121)
                 .car(car)
                 .coment(coment)
                 .build();
-        announcementDao.save(announcement );
+        announcementDao.save(announcement1);
+        BestAnnouncement bestAnnouncement = BestAnnouncement.builder()
+                .announcement(announcement1)
+                .user(user1)
+                .build();
+
         mockMvc.perform(
-                post("/buisness/add/best?id="+"1")
-                        .content(objectMapper.writeValueAsString(user))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
+                        post("/buisness/add/best?id=3&userId=2" )
+                                //.content(objectMapper.writeValueAsString(bestAnnouncement))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().is2xxSuccessful());
 
     }
 
 
-
-    @SneakyThrows
+    /*@SneakyThrows
     @Test
     void getup() throws JsonProcessingException {
         User user = User.builder()
@@ -231,7 +225,7 @@ class BuisnessControllerTest {/*
                 .nameCar("www")
                 .modelCar("eee")
                 .build();
-        Announcement announcement  =  Announcement.builder()
+        Announcement announcement = Announcement.builder()
                 .get_up(1)
                 .numberPhone(121)
                 .user(user)
@@ -239,10 +233,10 @@ class BuisnessControllerTest {/*
                 .build();
         announcementDao.save(announcement);
         mockMvc.perform(
-                put("/buisness/getup")
-                        .content(objectMapper.writeValueAsString(announcement))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
+                        put("/buisness/getup")
+                                .content(objectMapper.writeValueAsString(announcement))
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.get_up").value("2"));
     }*/

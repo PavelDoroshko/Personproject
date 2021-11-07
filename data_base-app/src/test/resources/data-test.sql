@@ -1,30 +1,29 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS announcement;
 DROP TABLE IF EXISTS car;
 
 
 
-CREATE TABLE user (
-                   user_id long  NOT NULL AUTO_INCREMENT,
+CREATE TABLE users (
+                   id long  NOT NULL AUTO_INCREMENT,
                                        login varchar(40),
                                         balance INT,
                                         pasword INT,
                                         best_announcement_id  long,
                                         credit_cart_id long,
-                                        PRIMARY KEY (user_id)
+                                        PRIMARY KEY (id)
 );
 CREATE TABLE announcement (
                        id long NOT NULL AUTO_INCREMENT,
                        get_up INT,
                        number_phone INT,
-                       user_user_id   long,
                        user_id long,
                        car_id long,
                        coment_id long,
                       coment_coment_id long,
                         best_announcement_id  long,
                        PRIMARY KEY (id),
-                       FOREIGN KEY (user_id) REFERENCES user(user_id)
+                       FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE car (
@@ -54,10 +53,9 @@ CREATE TABLE coment (
 CREATE TABLE credit_cart (
                                 id  long NOT NULL AUTO_INCREMENT,
                                  cash int,
-                                 user_user_id long,
                                 user_id long,
                                 PRIMARY KEY (id),
-                                FOREIGN KEY (user_user_id) REFERENCES  user(user_id )
+                                FOREIGN KEY (user_id) REFERENCES  users(id )
 
 );
  CREATE TABLE best_announcement (
@@ -71,9 +69,9 @@ CREATE TABLE credit_cart (
 
 
 
-    INSERT INTO user(  login,balance ,pasword , best_announcement_id )
+    INSERT INTO users (login,balance ,pasword , best_announcement_id )
                                 values ('pavel', 1, 22, 1);
-    INSERT INTO announcement(  get_up , number_phone ,user_id,  car_id, coment_id,coment_coment_id ,best_announcement_id  )
+    INSERT INTO announcement( get_up , number_phone ,user_id,  car_id, coment_id,coment_coment_id ,best_announcement_id  )
                                  values (2, 22, 1,1,1,1,1);
     INSERT INTO car ( name_car , model_car , price, year_of_issue , milage,volume_engine,
     type_engine,transmission,location,custom,exchange, announcement_id )
