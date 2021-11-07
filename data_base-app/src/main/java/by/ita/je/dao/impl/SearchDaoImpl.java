@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -20,10 +21,10 @@ public class SearchDaoImpl implements SearchDao {
     EntityManager entityManager;
 
     @Override
-    public List<Announcement> findByCriteria(String nameCar, String modelCar,int price,
-                                             String typeEngine,int yearOfIssue,int milage,
-                                             int volumeEngine,String transmission,String location,
-                                             String custom,String exchange) {
+    public List<Announcement> findByCriteria(String nameCar, String modelCar, int price,
+                                             String typeEngine, int yearOfIssue, int milage,
+                                             int volumeEngine, String transmission, String location,
+                                             String custom, String exchange) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Announcement> criteria = cb.createQuery(Announcement.class);
@@ -48,26 +49,37 @@ public class SearchDaoImpl implements SearchDao {
         List<Announcement> announcementList1 = new ArrayList<>();
         List<Announcement> announcementList2 = new ArrayList<>();
         List<Announcement> announcementList3 = new ArrayList<>();
-if(nameCar!="") {
-    for (Announcement announcement : announcementList) {
-        if (announcement.getCar().getNameCar().equals(nameCar)) {
-            announcementList1.add(announcement);
-        }
-    }
-    if (modelCar =="") {
-        return announcementList1;
-    }
-    if (modelCar != "") {
-        for (Announcement announcement1 : announcementList1) {
-            if (announcement1.getCar().getModelCar().equals(modelCar)) {
-                announcementList2.add(announcement1);
-                //return announcementList2;
+
+        announcementList.sort(new Comparator<Announcement>() {
+            @Override
+            public int compare(Announcement o1, Announcement o2) {
+                if (o1.getGet_up() == o2.getGet_up()) return 0;
+                else if (o1.getGet_up() > o2.getGet_up()) return -1;
+                else return 1;
             }
-          //  return announcementList2;
+        });
+
+
+        if (nameCar != "") {
+            for (Announcement announcement : announcementList) {
+                if (announcement.getCar().getNameCar().equals(nameCar)) {
+                    announcementList1.add(announcement);
+                }
+            }
+            if (modelCar == "") {
+                return announcementList1;
+            }
+            if (modelCar != "") {
+                for (Announcement announcement1 : announcementList1) {
+                    if (announcement1.getCar().getModelCar().equals(modelCar)) {
+                        announcementList2.add(announcement1);
+                        //return announcementList2;
+                    }
+                    //  return announcementList2;
+                }
+                return announcementList2;
+            }
         }
-        return announcementList2;
-    }
-}
-      return announcementList;
+        return announcementList;
     }
 }

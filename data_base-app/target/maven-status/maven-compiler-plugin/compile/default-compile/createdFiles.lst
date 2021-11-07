@@ -21,6 +21,7 @@ by\ita\je\entity\Car$CarBuilder.class
 by\ita\je\entity\BestAnnouncement$BestAnnouncementBuilder.class
 by\ita\je\dao\ComentDao.class
 by\ita\je\dto\ComentDto.class
+by\ita\je\dao\impl\SearchDaoImpl$1.class
 by\ita\je\controller\ControllerException.class
 by\ita\je\service\InterfaceComentService.class
 by\ita\je\dto\CreditCartDto.class
