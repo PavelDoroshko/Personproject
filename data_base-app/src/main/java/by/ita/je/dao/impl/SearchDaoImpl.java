@@ -73,9 +73,9 @@ public class SearchDaoImpl implements SearchDao {
                 for (Announcement announcement1 : announcementList1) {
                     if (announcement1.getCar().getModelCar().equals(modelCar)) {
                         announcementList2.add(announcement1);
-                        //return announcementList2;
+
                     }
-                    //  return announcementList2;
+
                 }
                 return announcementList2;
             }

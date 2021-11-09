@@ -204,7 +204,7 @@ class BuisnessControllerTest {
 
         mockMvc.perform(
                         post("/buisness/add/best?id=3&userId=2" )
-                                //.content(objectMapper.writeValueAsString(bestAnnouncement))
+
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().is2xxSuccessful());
@@ -212,32 +212,5 @@ class BuisnessControllerTest {
     }
 
 
-    /*@SneakyThrows
-    @Test
-    void getup() throws JsonProcessingException {
-        User user = User.builder()
-                .login("eee")
-                .balance(20)
-                .pasword(123)
-                .build();
-        userDao.save(user);
-        Car car = Car.builder()
-                .nameCar("www")
-                .modelCar("eee")
-                .build();
-        Announcement announcement = Announcement.builder()
-                .get_up(1)
-                .numberPhone(121)
-                .user(user)
-                .car(car)
-                .build();
-        announcementDao.save(announcement);
-        mockMvc.perform(
-                        put("/buisness/getup")
-                                .content(objectMapper.writeValueAsString(announcement))
-                                .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.get_up").value("2"));
-    }*/
+
 }
