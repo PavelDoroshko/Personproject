@@ -72,10 +72,7 @@ class BuisnessControllerTest {
 
     }
 
-    @Test
-    void readOne() {
 
-    }
 
     @SneakyThrows
     @Test

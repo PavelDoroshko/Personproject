@@ -167,25 +167,6 @@ class BuisnessServiceTest {
 
     }
 
-   /* @Test
-    void getUpAnnoncement() {
-        int money =10;
-        User user = User.builder()
-                .pasword(12)
-                .balance(23)
-                .build();
-        interfaseUserService.create(user);
-Announcement announcement = Announcement.builder()
-        .numberPhone(12)
-        .car(createCar())
-        .coment(createComentNew())
-        .get_up(0)
-        .build();
-interfaceAnnouncement.create(announcement);
-int get_up_actual = announcement.getGet_up();
-Announcement announcementExpected = interfaceBuisness.getUpAnnoncementMoney(announcement.getId(),money,user.getUser_id());
-        Assertions.assertEquals(get_up_actual+10, announcementExpected.getGet_up());
-    }*/
 
     private User createUserNew() {
         User user = User.builder()
