@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AnnouncementList</title>
+    <style>
+    body {
+      background-color: #11AA99;
+    }
+  </style>
+
+</head>
+<body>
+<form method="get" action="/data_base-app//">
+    <button type="submit">Вернуться </button>
+</form>
+<input type="button" onclick="history.back(-4); return false;" value="Назад"/>
+<p>
+<div th:if="${not #lists.isEmpty(announcements)}">
+    <div th:each="announcement : ${announcements}">
+
+        </form>
+        <p th:text="'ID: ' + ${announcement.id}"></p>
+        <p th:text="'статус: ' + ${announcement.get_up}"></p>
+        <p th:text="'номер телефона: ' + ${announcement.numberPhone}"></p>
+        <p th:text="'марка автомобиля: ' + ${announcement.car.nameCar}"></p>
+        <p th:text="'модель автомобиля:' + ${announcement.car.modelCar}"></p>
+        <p th:text="'цена:' + ${announcement.car.price}"></p>
+        <p th:text="'год выпуска:' + ${announcement.car.yearOfIssue}"></p>
+        <p th:text="'пробег:' + ${announcement.car.milage}"></p>
+        <p th:text="'объем двигателя:' + ${announcement.car.volumeEngine}"></p>
+        <p th:text="'тип двигателя:' + ${announcement.car.typeEngine}"></p>
+        <p th:text="'коробка:' + ${announcement.car.transmission}"></p>
+        <p th:text="'регион:' + ${announcement.car.location}"></p>
+        <p th:text="'растаможка:' + ${announcement.car.custom}"></p>
+        <p th:text="'обмен:' + ${announcement.car.exchange}"></p>
+        <hr>
+    </div>
+</div>
+</body>
+</html>

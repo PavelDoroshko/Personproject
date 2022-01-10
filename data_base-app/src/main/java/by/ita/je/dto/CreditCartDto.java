@@ -1,6 +1,6 @@
 package by.ita.je.dto;
 
-import by.ita.je.module.User;
+import by.ita.je.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class CreditCartDto {
     private long id;
     private int cash;
-    private User user;
+
 
 }

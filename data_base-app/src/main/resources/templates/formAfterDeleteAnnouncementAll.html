@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>formAfterDeleteAnnouncementAll</title>
+    <style>
+    body {
+      background-color: #00CC66;
+    }
+  </style>
+</head>
+<body>
+<h2>объявление удалено:</h2>
+<form id="formAnnouncement" method="get">
+    <input name="id" type="text" th:value= "${userId}" id ="id" hidden="true"/>
+</form>
+<button type="submit" form="formAnnouncement" formaction="/data_base-app/findUserById" >вернуться в личный кабинет</button>
+
+
+</body>
+</html>

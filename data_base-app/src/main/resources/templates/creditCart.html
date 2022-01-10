@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>creditCart</title>
+    <style>
+    body {
+      background-color: #00CC66;
+    }
+  </style>
+</head>
+<body>
+
+<form id="creditCart" method="get">
+    <input name="id" type="text" th:value= "${userId}" id ="id" hidden="true"/>
+</form>
+<button type="submit" form="creditCart" formaction="/data_base-app/findUserById" >вернуться в личный кабинет</button>
+
+<p th:text="'сумма ' + ${creditCart.cash}"></p>
+
+
+</body>
+</html>

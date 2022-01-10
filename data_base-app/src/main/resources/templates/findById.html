@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Find by id</title>
+  <style>
+    body {
+      background-color: #00CC66;
+    }
+  </style>
+</head>
+<body>
+
+<form id="findById" method="get">
+  <input name="id" type="text" th:value= "${userdLogin.id}" id="id" hidden="true"/>
+</form>
+<button type="submit" form="findById" formaction="/data_base-app/findAllAnnouncement" >смотреть все объявления</button>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/createAnnouncement}">
+  <button type="submit">создать новое обьявление</button>
+</form>
+<p>
+<p>
+<form method="post" th:action="@{/__${userdLogin.id}__/createCreditCart}">
+  <button type="submit">электронный кошелек</button>
+</form>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/addBalance}">
+  <button type="submit">пополнить баланс</button>
+</form>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/findAnnouncementById}">
+  <button type="submit">найти объявление</button>
+</form>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/getUpAnnouncement}">
+  <button type="submit">поднять объявление</button>
+</form>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/update}">
+  <button type="submit">редактировать объявление</button>
+</form>
+<p>
+<form method="get" th:action="@{/__${userdLogin.id}__/deleteAnnouncement}">
+  <button type="submit">удалить объявление</button>
+</form>
+ <p>
+<form method="get" th:action="@{/__${userdLogin.id}__/createBestAnnouncement}">
+  <button type="submit">сделать закладку</button>
+</form>
+<p>
+<form action="/data_base-app/findAllBestAnnouncement" method="get">
+  <button type="submit">показать весь список закладок</button>
+</form>
+<p>
+<form method="get" action="/data_base-app//">
+  <button type="submit">На главную страницу</button>
+</form>
+</table>
+<p>
+<h3>Человек по логину <t th:text="${userdLogin.login}" /></h3>
+<table border="1" width="45%" cellpadding="5">
+  <tr>
+
+    <th>логин:</th>
+    <th>баланс:</th>
+    <th>пароль</th>
+  </tr>
+  <tr>
+
+    <td th:text="${userdLogin.login}">Nothing</td>
+    <td th:text="${userdLogin.balance}">Nothing</td>
+    <td th:text="${userdLogin.pasword}">Nothing</td>
+  </tr>
+</table>
+
+
+</body>
+</html>

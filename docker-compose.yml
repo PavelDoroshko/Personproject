@@ -1,0 +1,29 @@
+version: '3.3'
+
+networks:
+  ita:
+
+services:
+  databaseapp:
+    container_name: database
+    build: ./data_base-app
+    image: database
+    depends_on:
+      - db
+    networks:
+      - ita
+    ports:
+      - "8003:8003"
+
+  db:
+      hostname: db
+      image: postgres:13.4-alpine
+      env_file:
+        - database-db/database.env
+      networks:
+        - ita
+      ports:
+        - "5433:5432"
+      volumes:
+        - ./database-db/data.sql:/docker-entrypoint-initdb.d/data.sql
+        - ./database-db/data:/var/lib/postgresql/data/

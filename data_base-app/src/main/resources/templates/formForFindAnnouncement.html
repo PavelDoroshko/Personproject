@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Form For Find Announcement</title>
+  <style>
+        body {
+            background-color: #0022CCFF;
+        }
+    </style>
+</head>
+<body>
+<h1>поиск объявления</h1>
+<form action="#" th:action="@{/__${userId}__/newFindAnnouncement}" th:object="${announcement}" method="get">
+ id: <input type="text" th:field="${announcementd.id}" pattern="(^[0-9]{0,7})+$" required/>
+
+  <p><input type="submit" value="Найти" /> <input type="reset" value="Отменить" /></p>
+</form>
+<br>
+<form method="get" action="/data_base-app//">
+  <button type="submit">На главную страницу</button>
+</form>
+</body>
+</html>

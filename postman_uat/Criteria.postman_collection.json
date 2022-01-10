@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "47c429ec-f759-4e3f-b617-dd9aac95fb31",
+		"name": "Criteria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "searchCriteria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nameCar\":\"mazda\",\r\n     \"modelCar\": \"hhh\",\r\n\"yearOfIssue\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8003/data_base-app/search/criteria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8003",
+					"path": [
+						"data_base-app",
+						"search",
+						"criteria"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "searchCriteria",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"nameCar\": \"mazda\",\r\n    \"modelCar\":\"lll\"       \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/data_base-app/search/criteria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"data_base-app",
+								"search",
+								"criteria"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Nov 2021 15:02:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"get_up\": 0,\n        \"numberPhone\": 222,\n        \"car\": {\n            \"id\": 1,\n            \"nameCar\": \"mazda\",\n            \"modelCar\": \"lll\",\n            \"price\": 0,\n            \"yearOfIssue\": 0,\n            \"milage\": 0,\n            \"volumeEngine\": 0,\n            \"typeEngine\": null,\n            \"transmission\": null,\n            \"location\": null,\n            \"custom\": null,\n            \"exchange\": null\n        },\n        \"coment\": {\n            \"id\": 1,\n            \"message\": \"jjj\"\n        },\n        \"user\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "findCriteriaOneParametr",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"nameCar\": \"mazda\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8003/data_base-app/search/criteria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8003",
+					"path": [
+						"data_base-app",
+						"search",
+						"criteria"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "findCriteriaOneParametr",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nameCar\": \"mazda\" ,\r\n   \"modelCar\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/data_base-app/search/criteria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"data_base-app",
+								"search",
+								"criteria"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Nov 2021 15:06:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"get_up\": 0,\n        \"numberPhone\": 222,\n        \"car\": {\n            \"id\": 1,\n            \"nameCar\": \"mazda\",\n            \"modelCar\": \"lll\",\n            \"price\": 0,\n            \"yearOfIssue\": 0,\n            \"milage\": 0,\n            \"volumeEngine\": 0,\n            \"typeEngine\": null,\n            \"transmission\": null,\n            \"location\": null,\n            \"custom\": null,\n            \"exchange\": null\n        },\n        \"coment\": {\n            \"id\": 1,\n            \"message\": \"jjj\"\n        },\n        \"user\": null\n    },\n    {\n        \"id\": 2,\n        \"get_up\": 0,\n        \"numberPhone\": 222,\n        \"car\": {\n            \"id\": 2,\n            \"nameCar\": \"mazda\",\n            \"modelCar\": \"kkk\",\n            \"price\": 0,\n            \"yearOfIssue\": 0,\n            \"milage\": 0,\n            \"volumeEngine\": 0,\n            \"typeEngine\": null,\n            \"transmission\": null,\n            \"location\": null,\n            \"custom\": null,\n            \"exchange\": null\n        },\n        \"coment\": {\n            \"id\": 2,\n            \"message\": \"jjj\"\n        },\n        \"user\": null\n    }\n]"
+				}
+			]
+		}
+	]
+}

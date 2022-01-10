@@ -15,8 +15,6 @@ public class AnnouncementDto {
     private int numberPhone;
     private CarDto car;
     private ComentDto coment;
-    private UserDto user;
-    private BestAnnouncementDto bestAnnouncement;
 
 
 }

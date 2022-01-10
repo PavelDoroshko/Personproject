@@ -20,5 +20,5 @@ public class CarDto {
     private String location;
     private String custom;
     private String exchange;
-   // private AnnouncementDto announcementDto;
+
 }
