@@ -8,7 +8,7 @@ spring:
     hibernate:
       ddl-auto: create
   datasource:
-    url: jdbc:postgresql://db:5432/tdb
+    url: jdbc:postgresql://localhost:5433/tdb
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
