@@ -17,6 +17,7 @@ import java.util.List;
 
 @Repository
 public class SearchDaoImpl implements SearchDao {
+
     @PersistenceContext
     EntityManager entityManager;
 
